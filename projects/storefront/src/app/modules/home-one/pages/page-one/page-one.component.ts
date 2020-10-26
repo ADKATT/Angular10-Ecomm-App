@@ -37,6 +37,19 @@ interface DeferredData<T> {
 })
 export class PageOneComponent implements OnInit {
     featuredProducts: ProductsCarouselData;
+	
+	permission: any = {
+		finder : true,
+		features : true,
+		products_carousel : true,
+		sale_timer : true,
+		blockZone : true,
+		banners : true,
+		products_new_arrival : true,
+		posts_carousel : true,
+		brands : true,
+		products_columns : true,
+	}
 
     blockSale: DeferredData<Product[]>;
 

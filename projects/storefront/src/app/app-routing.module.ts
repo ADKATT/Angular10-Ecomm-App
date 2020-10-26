@@ -3,25 +3,10 @@ import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { RootComponent } from './components/root/root.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 
-
 const routes: Routes = [
     /**
      * ROUTES_ONLY_FOR_DEMO / START
      */
-    {
-        path: 'home-two',
-        component: RootComponent,
-        data: {
-            desktopHeader: 'classic/one',
-        },
-        children: [
-            {
-                path: '',
-                pathMatch: 'full',
-                loadChildren: () => import('./modules/home-two/home-two.module').then(m => m.HomeTwoModule),
-            },
-        ],
-    },
     // Desktop header variations.
     {path: 'header-spaceship-variant-one',   component: RootComponent, data: {desktopHeader: 'spaceship/one'}},
     {path: 'header-spaceship-variant-two',   component: RootComponent, data: {desktopHeader: 'spaceship/two'}},
@@ -61,10 +46,6 @@ const routes: Routes = [
                 loadChildren: () => import('./modules/home-one/home-one.module').then(m => m.HomeOneModule),
             },
             {
-                path: 'shop',
-                loadChildren: () => import('./modules/shop/shop.module').then(m => m.ShopModule),
-            },
-            {
                 path: 'blog',
                 loadChildren: () => import('./modules/blog/blog.module').then(m => m.BlogModule),
             },
@@ -73,17 +54,12 @@ const routes: Routes = [
                 loadChildren: () => import('./modules/account/account.module').then(m => m.AccountModule),
             },
             {
-                path: 'site',
-                loadChildren: () => import('./modules/site/site.module').then(m => m.SiteModule),
-            },
-            {
                 path: '**',
                 component: PageNotFoundComponent,
             },
         ],
     },
 ];
-
 
 @NgModule({
     imports: [

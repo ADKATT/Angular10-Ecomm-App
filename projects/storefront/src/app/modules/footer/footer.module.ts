@@ -9,18 +9,12 @@ import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from '../shared/shared.module';
 
 // components
-import { ContactsComponent } from './components/contacts/contacts.component';
 import { FooterComponent } from './footer.component';
-import { LinksComponent } from './components/links/links.component';
-import { NewsletterComponent } from './components/newsletter/newsletter.component';
 
 @NgModule({
     declarations: [
         // components
-        ContactsComponent,
         FooterComponent,
-        LinksComponent,
-        NewsletterComponent,
     ],
     exports: [
         // components
