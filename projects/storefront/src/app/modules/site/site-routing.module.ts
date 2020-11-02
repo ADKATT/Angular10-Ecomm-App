@@ -9,12 +9,11 @@ import { PageFaqComponent } from './pages/page-faq/page-faq.component';
 import { PageTermsComponent } from './pages/page-terms/page-terms.component';
 import { PageTypographyComponent } from './pages/page-typography/page-typography.component';
 
-
 const routes: Routes = [
     {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'about-us',
+        redirectTo: 'about-us'
     },
     {
         path: 'about-us',

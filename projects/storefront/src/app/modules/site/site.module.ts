@@ -23,7 +23,6 @@ import { BlockMapComponent } from './blocks/block-map/block-map.component';
 import { BlockReviewsComponent } from './blocks/block-reviews/block-reviews.component';
 import { BlockTeammatesComponent } from './blocks/block-teammates/block-teammates.component';
 
-
 @NgModule({
     declarations: [
         // pages

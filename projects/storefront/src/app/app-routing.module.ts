@@ -61,6 +61,14 @@ const routes: Routes = [
                 path: 'site',
                 loadChildren: () => import('./modules/site/site.module').then(m => m.SiteModule),
             },
+			{
+                path: 'about',
+                loadChildren: () => import('./modules/about/about.module').then(m => m.AboutModule),
+            },
+			{
+                path: 'product',
+                loadChildren: () => import('./modules/product/product.module').then(m => m.ProductModule),
+            },
             {
                 path: '**',
                 component: PageNotFoundComponent,

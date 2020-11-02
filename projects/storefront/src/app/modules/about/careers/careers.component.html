@@ -1,0 +1,52 @@
+<!-- <app-block-header -->
+    <!-- [pageTitle]="pageTitle$|async" -->
+    <!-- [breadcrumb]="breadcrumbs$|async" -->
+<!-- ></app-block-header> -->
+
+<!-- <div class="block-split"> -->
+    <!-- <div class="container"> -->
+        <!-- <div class="block-split__row row no-gutters"> -->
+            <!-- <div class="block-split__item block-split__item-content col-auto"> -->
+                <!-- <div class="block"> -->
+					
+                <!-- </div> -->
+            <!-- </div> -->
+        <!-- </div> -->
+    <!-- </div> -->
+	<div class="card">
+		<div class="card-header">
+			<!-- <h5>{{ 'HEADER_ORDER_HISTORY'|translate }}</h5> -->
+			<h1 class="text-center mt-3">Careers</h1>
+		</div>
+		<ng-container *ngIf="list">
+			<div class="card-divider"></div>
+			<div class="card-table">
+				<div class="table-responsive-sm">
+					<table class="text-center">
+						<thead>
+						<tr>
+							<th>Location</th>
+							<th>Position</th>
+							<th>Apply</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr *ngFor="let order of list">
+							<td>{{ order.location }}</td>
+							<td>{{ order.position }}</td>
+							<td><button class="btn btn-primary">Apply</button></td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="card-divider"></div>
+			<div class="card-footer">
+			<!-- <app-pagination [formControl]="currentPage" [siblings]="2" [total]="list.pages"></app-pagination> -->
+			</div>
+		</ng-container>
+	</div>
+
+<!-- </div> -->
+
+<app-block-space layout="before-footer"></app-block-space>

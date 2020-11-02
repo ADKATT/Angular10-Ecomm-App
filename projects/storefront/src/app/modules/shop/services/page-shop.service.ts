@@ -6,7 +6,6 @@ import { GetProductsListOptions } from '../../../api/base';
 import { ActiveFilter, Filter } from '../../../interfaces/filter';
 import { filterHandlers } from '../filters/filter-handlers';
 
-
 @Injectable()
 export class PageShopService {
     private listSubject$: ReplaySubject<ProductsList> = new ReplaySubject<ProductsList>(1);

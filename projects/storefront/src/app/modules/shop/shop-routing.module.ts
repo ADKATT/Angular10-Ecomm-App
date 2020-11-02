@@ -17,7 +17,7 @@ import { ProductsListResolver } from './resolvers/products-list.resolver';
 import { RootCategoriesResolver } from './resolvers/root-categories.resolver';
 // guards
 import { CheckoutGuard } from './guards/checkout.guard';
-
+import { PageCareersComponent } from './pages/page-careers/page-careers.component';
 
 const routes: Routes = [
     {
@@ -193,6 +193,20 @@ const routes: Routes = [
             categorySlug: 'headlights-lighting',
         },
     },
+	{
+        path: `careers`,
+        component: PageCareersComponent,
+        resolve: {
+            category: CategoryResolver,
+            productsList: ProductsListResolver,
+        },
+        data: {
+            layout: 'table',
+            gridLayout: 'grid-4-sidebar',
+            sidebarPosition: 'start',
+            categorySlug: 'headlights-lighting',
+        },
+    },
     {
         path: `shop-right-sidebar`,
         component: PageShopComponent,
@@ -233,7 +247,6 @@ const routes: Routes = [
         },
     },
 ];
-
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],

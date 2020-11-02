@@ -7,8 +7,8 @@ export const mainMenu: MainMenuLink[] = [
         submenu: {
             type: 'menu',
             links: [
-                {title: 'About Us', url: '/site/about-us'},
-                {title: 'Careers', url: '/shop/shop-table'},
+                {title: 'About Us', url: '/about/'},
+                {title: 'Careers', url: '/about/careers'},
             ],
         },
     },
@@ -20,15 +20,15 @@ export const mainMenu: MainMenuLink[] = [
             links: [
                 {
                     title: 'Brands',
-                    url: '/shop/category-columns-3-sidebar',
+                    url: '/product/brands',
 				},
 				{
                     title: 'Car Lines',
-                    url: '/shop/shop-list',
+                    url: '/product/car-lines',
 				},
 				{
                     title: 'Featured Brands',
-                    url: '/shop/shop-right-sidebar',
+                    url: '/product/featured-brands',
 				},
             ],
         },

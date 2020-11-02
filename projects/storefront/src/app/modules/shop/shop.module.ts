@@ -50,7 +50,7 @@ import { FilterRadioComponent } from './filters/filter-radio/filter-radio.compon
 import { FilterRangeComponent } from './filters/filter-range/filter-range.component';
 import { FilterRatingComponent } from './filters/filter-rating/filter-rating.component';
 import { FilterVehicleComponent } from './filters/filter-vehicle/filter-vehicle.component';
-
+import { PageCareersComponent } from './pages/page-careers/page-careers.component';
 
 @NgModule({
     declarations: [
@@ -86,6 +86,7 @@ import { FilterVehicleComponent } from './filters/filter-vehicle/filter-vehicle.
         FilterRangeComponent,
         FilterRatingComponent,
         FilterVehicleComponent,
+        PageCareersComponent,
     ],
     imports: [
         // modules (angular)
