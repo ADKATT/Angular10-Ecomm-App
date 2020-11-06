@@ -69,6 +69,30 @@ const routes: Routes = [
                 path: 'product',
                 loadChildren: () => import('./modules/product/product.module').then(m => m.ProductModule),
             },
+			{
+                path: 'search-inventory',
+                loadChildren: () => import('./modules/search-inventory/search-inventory.module').then(m => m.SearchInventoryModule),
+            },
+			{
+                path: 'order-history',
+                loadChildren: () => import('./modules/order-history/order-history.module').then(m => m.OrderHistoryModule),
+            },
+			{
+                path: 'cart',
+                loadChildren: () => import('./modules/cart/cart.module').then(m => m.CartModule),
+            },
+			{
+                path: 'sales-portal',
+                loadChildren: () => import('./modules/sales-portal/sales-portal.module').then(m => m.SalesPortalModule),
+            },
+			{
+                path: 'customer',
+                loadChildren: () => import('./modules/customer/customer.module').then(m => m.CustomerModule),
+            },
+			{
+                path: 'reset-password',
+                loadChildren: () => import('./modules/reset-password/reset-password.module').then(m => m.ResetPasswordModule),
+            },
             {
                 path: '**',
                 component: PageNotFoundComponent,

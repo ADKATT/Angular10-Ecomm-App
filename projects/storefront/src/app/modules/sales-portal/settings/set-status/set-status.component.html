@@ -1,0 +1,115 @@
+<app-block-header
+    pageTitle="Set Status"
+></app-block-header>
+<!-- <app-block-header -->
+    <!-- pageTitle="Locations" -->
+    <!-- [breadcrumb]="[ -->
+        <!-- {label: 'Home', url: ''}, -->
+        <!-- {label: 'Breadcrumb', url: ''}, -->
+        <!-- {label: 'Current Page', url: ''} -->
+    <!-- ]" -->
+<!-- ></app-block-header> -->
+<div class="block">
+    <div class="container container--max--lg">
+        <div class="card contacts">
+            <div class="card-body card-body--padding--2">
+                <div class="row">
+					<div class="col-12 col-lg-7 col-xl-6" [formGroup]="statusForm">
+						<div class="form-group">
+							<label for="password-current">Status <span class="text-danger">*</span></label>
+							<select class="form-control" formControlName="status" (change)="onChange($event)" [ngClass]="{ 'is-invalid': submitted && f.status.errors }">
+								<option value="" disabled selected="selected">Select Status</option>
+								<option value="Offline">Offline</option>
+								<option value="lunch">Away for lunch</option>
+								<option value="day">Away for Rest of the Day</option>
+								<option value="time">Away for Custom Amount of Time</option>
+							</select>
+							<div class="is-invalid" *ngIf="submitted && f.status.errors">
+								<div class="text-danger" *ngIf="f.status.errors.required">
+									Status is required
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group" *ngIf="showTime">
+							<label for="password-current">Hours <span class="text-danger">*</span></label>
+							<input type="time" class="form-control" formControlName="hours">
+							<!-- <div class="is-invalid" *ngIf="submitted && f.hours.errors"> -->
+								<!-- <div class="text-danger" *ngIf="f.hours.errors.required"> -->
+									<!-- Hours is required -->
+								<!-- </div> -->
+							<!-- </div> -->
+						</div>
+
+						<div class="form-group mb-0">
+							<button
+								class="btn btn-primary mt-3"
+								(click)="save()"
+							>Apply</button>
+						</div>
+					</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="block mt-3">
+    <div class="container container--max--lg">
+        <div class="card contacts">
+            <div class="card-body card-body--padding--2">
+                <div class="row">
+					<div class="col-12 col-lg-12 col-xl-12">
+						<span>Assign to another Person</span><hr/>
+					</div>
+					<div class="col-12 col-lg-7 col-xl-6" [formGroup]="assignForm">
+						<div class="form-group">
+							<label for="email">Forward email to <span class="text-danger">*</span></label>
+							<input type="email" name="email" class="form-control" formControlName="email" placeholder="Email" />
+							<div class="is-invalid" *ngIf="submitted1 && g.email.errors">
+								<div class="text-danger" *ngIf="g.email.errors.required">
+									Email is required
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="email-communications">Send me a Copy of the Email Communications</label><br/>
+							<input type="checkbox" formControlName="email_communications">
+						</div>
+						
+						<div class="form-group">
+							<label for="chat-communications">Send me a Copy of the Chat Communications</label><br/>
+							<input type="checkbox" formControlName="chat_communications">
+						</div>
+
+						<div class="form-group">
+							<label for="duration">From date <span class="text-danger">*</span></label>
+							<input type="text" class="form-control" #dp="bsDatepicker" formControlName="fromDate" placeholder="From Date" [ngClass]="{ 'is-invalid': submitted1 && g.fromDate.errors }" [bsConfig]="bsConfig" bsDatepicker>
+							<small class="form-text text-muted" *ngIf="submitted1 && g.fromDate.errors" >
+								<div class="text-danger" *ngIf="g.fromDate.errors.required">Start Date is required</div>
+							</small>
+						</div>
+
+						<div class="form-group">
+							<label for="duration">To date <span class="text-danger">*</span></label>
+							<input type="text" class="form-control" #dp="bsDatepicker" formControlName="toDate" placeholder="To Date" [ngClass]="{ 'is-invalid': submitted1 && g.toDate.errors }" [bsConfig]="bsConfig" bsDatepicker>
+							<small class="form-text text-muted" *ngIf="submitted1 && g.toDate.errors" >
+								<div class="text-danger" *ngIf="g.toDate.errors.required">Start Date is required</div>
+							</small>
+						</div>
+
+						<div class="form-group mb-0">
+							<button
+								class="btn btn-primary mt-3"
+								(click)="assignMessage()"
+							>Add</button>
+						</div>
+					</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-block-space layout="before-footer"></app-block-space>

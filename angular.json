@@ -44,7 +44,7 @@
               "projects/storefront/src/scss/style.header-classic-variant-four.scss",
               "projects/storefront/src/scss/style.header-classic-variant-five.scss",
               "projects/storefront/src/scss/style.mobile-header-variant-one.scss",
-              "projects/storefront/src/scss/style.mobile-header-variant-two.scss"
+              "projects/storefront/src/scss/style.mobile-header-variant-two.scss",
             ],
             "scripts": []
           },

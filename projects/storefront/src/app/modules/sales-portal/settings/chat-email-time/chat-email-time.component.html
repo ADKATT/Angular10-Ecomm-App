@@ -1,0 +1,45 @@
+<app-block-header
+    pageTitle="Set Chat Email Time (in minutes)"
+></app-block-header>
+<!-- <app-block-header -->
+    <!-- pageTitle="Locations" -->
+    <!-- [breadcrumb]="[ -->
+        <!-- {label: 'Home', url: ''}, -->
+        <!-- {label: 'Breadcrumb', url: ''}, -->
+        <!-- {label: 'Current Page', url: ''} -->
+    <!-- ]" -->
+<!-- ></app-block-header> -->
+<div class="block">
+    <div class="container container--max--lg">
+        <div class="card contacts">
+            <div class="card-body card-body--padding--2">
+                <div class="row">
+					<div class="col-12 col-lg-7 col-xl-6" [formGroup]="statusForm">
+						<div class="form-group">
+							<label for="set-time">Set Time <span class="text-danger">*</span></label>
+							<select class="form-control" formControlName="chatTime" [ngClass]="{ 'is-invalid': submitted && f.chatTime.errors }">
+								<option value="" disabled selected="selected">Select Time</option>
+								<option *ngFor="let count of timeCounts" value="{{count}}">{{count}}</option>	
+							</select>
+							<div class="is-invalid" *ngIf="submitted && f.chatTime.errors">
+								<div class="text-danger" *ngIf="f.chatTime.errors.required">
+									Chat time is required
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group mb-0">
+							<button
+								class="btn btn-primary mt-3"
+								(click)="save()"
+							>Save</button>
+						</div>
+					</div>
+					<span class="mt-3 ml-3">This is the time limit an email is sent to you if have not responded to a customer chat message.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-block-space layout="before-footer"></app-block-space>

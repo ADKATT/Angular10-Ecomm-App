@@ -23,7 +23,6 @@ import { PageOrdersComponent } from './pages/page-orders/page-orders.component';
 import { PagePasswordComponent } from './pages/page-password/page-password.component';
 import { PageProfileComponent } from './pages/page-profile/page-profile.component';
 
-
 @NgModule({
     declarations: [
         // components

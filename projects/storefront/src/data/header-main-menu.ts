@@ -53,19 +53,37 @@ export const mainMenu: MainMenuLink[] = [
     {
         title: 'Specials',
         url: '/account',
-        // submenu: {
-            // type: 'menu',
-            // links: [
-                // {title: 'Login & Register', url: '/account/login'},
-                // {title: 'Dashboard', url: '/account/dashboard'},
-                // {title: 'Garage', url: '/account/garage'},
-                // {title: 'Edit Profile', url: '/account/profile'},
-                // {title: 'Order History', url: '/account/orders'},
-                // {title: 'Order Details', url: '/account/order-details'},
-                // {title: 'Address Book', url: '/account/addresses'},
-                // {title: 'Edit Address', url: '/account/edit-address'},
-                // {title: 'Change Password', url: '/account/password'},
-            // ],
-        // },
+    },
+	{
+        title: 'Sales Portal',
+        url: '/sales-portal',
+        submenu: {
+            type: 'menu',
+            links: [
+                {title: 'Chat', url: '/sales-portal/chat'},
+                {title: 'Ask Price', url: '/sales-portal/ask-price'},
+				{title: 'Cart', url: '/sales-portal/cart'},
+                {
+                    title: 'History',
+                    url: '/history',
+                    links: [
+                        {title: 'Order History', url: '/sales-portal/order-history'},
+                        {title: 'Quote History', url: '/sales-portal/quote-history'},
+                        {title: 'Chat History', url: '/sales-portal/chat-history'},
+						{title: 'Search History', url: '/sales-portal/search-history'},
+                        {title: 'Assigned Chat History', url: '/sales-portal/assigned-chat-history'},
+                    ],
+                },
+                {
+                    title: 'Settings',
+                    url: '/sales-portal/chat-email-time',
+                    links: [
+                        {title: 'Chat Email Time', url: '/sales-portal/chat-email-time'},
+                        {title: 'Set Status', url: '/sales-portal/set-status'},
+                    ],
+                },
+				{title: 'Customer Stats', url: '/sales-portal/customer-stats'},
+            ],
+        },
     },
 ];
