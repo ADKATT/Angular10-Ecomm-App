@@ -79,7 +79,7 @@
 				</div>
 
 				<div class="table table-striped table-bordered base-style">	
-					<ngx-datatable #table class="bootstrap ps" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="tableLimit" fxFlex="auto" [perfectScrollbar]="config">
+					<ngx-datatable #table class="bootstrap ps" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="tableLimit" fxFlex="auto" [perfectScrollbar]="config" [scrollbarH]="true">
 
 						<ngx-datatable-column name="Part Number Search" [flexGrow]="1" [minWidth]="110" [maxWidth]="130">
 							<ng-template let-row="row" ngx-datatable-cell-template>
