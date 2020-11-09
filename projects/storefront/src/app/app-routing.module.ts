@@ -8,17 +8,17 @@ const routes: Routes = [
      * ROUTES_ONLY_FOR_DEMO / START
      */
     // Desktop header variations.
-    {path: 'header-spaceship-variant-one',   component: RootComponent, data: {desktopHeader: 'spaceship/one'}},
-    {path: 'header-spaceship-variant-two',   component: RootComponent, data: {desktopHeader: 'spaceship/two'}},
-    {path: 'header-spaceship-variant-three', component: RootComponent, data: {desktopHeader: 'spaceship/three'}},
-    {path: 'header-classic-variant-one',     component: RootComponent, data: {desktopHeader: 'classic/one'}},
-    {path: 'header-classic-variant-two',     component: RootComponent, data: {desktopHeader: 'classic/two'}},
-    {path: 'header-classic-variant-three',   component: RootComponent, data: {desktopHeader: 'classic/three'}},
-    {path: 'header-classic-variant-four',    component: RootComponent, data: {desktopHeader: 'classic/four'}},
-    {path: 'header-classic-variant-five',    component: RootComponent, data: {desktopHeader: 'classic/five'}},
+    // {path: 'header-spaceship-variant-one',   component: RootComponent, data: {desktopHeader: 'spaceship/one'}},
+    // {path: 'header-spaceship-variant-two',   component: RootComponent, data: {desktopHeader: 'spaceship/two'}},
+    // {path: 'header-spaceship-variant-three', component: RootComponent, data: {desktopHeader: 'spaceship/three'}},
+    // {path: 'header-classic-variant-one',     component: RootComponent, data: {desktopHeader: 'classic/one'}},
+    // {path: 'header-classic-variant-two',     component: RootComponent, data: {desktopHeader: 'classic/two'}},
+    // {path: 'header-classic-variant-three',   component: RootComponent, data: {desktopHeader: 'classic/three'}},
+    // {path: 'header-classic-variant-four',    component: RootComponent, data: {desktopHeader: 'classic/four'}},
+    // {path: 'header-classic-variant-five',    component: RootComponent, data: {desktopHeader: 'classic/five'}},
     // Mobile header variations.
-    {path: 'mobile-header-variant-one',      component: RootComponent, data: {mobileHeader: 'one'}},
-    {path: 'mobile-header-variant-two',      component: RootComponent, data: {mobileHeader: 'two'}},
+    // {path: 'mobile-header-variant-one',      component: RootComponent, data: {mobileHeader: 'one'}},
+    // {path: 'mobile-header-variant-two',      component: RootComponent, data: {mobileHeader: 'two'}},
     /**
      * ROUTES_ONLY_FOR_DEMO / END
      */
@@ -84,10 +84,6 @@ const routes: Routes = [
 			{
                 path: 'sales-portal',
                 loadChildren: () => import('./modules/sales-portal/sales-portal.module').then(m => m.SalesPortalModule),
-            },
-			{
-                path: 'customer',
-                loadChildren: () => import('./modules/customer/customer.module').then(m => m.CustomerModule),
             },
 			{
                 path: 'reset-password',

@@ -1,10 +1,7 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { AccountApi } from '../../../api/base';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { Address } from '../../../interfaces/address';
 import { UrlService } from '../../../services/url.service';
-import { Order } from '../../../interfaces/order';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
@@ -29,8 +26,6 @@ export class CustomerStatsComponent implements OnInit, OnDestroy {
 	oflinetemp2 = this.oflinerows;
 	oflinetableLimit:number = 10;
 	oflineselectEntry:any = 10;
-    address: Address;
-    orders: Order[] = [];
 	tableShow: any = false;
 	public searchForm: FormGroup;
 	public config: PerfectScrollbarConfigInterface = { suppressScrollY : true };
@@ -40,15 +35,11 @@ export class CustomerStatsComponent implements OnInit, OnDestroy {
 	bsConfig: Partial<BsDatepickerConfig> = Object.assign({}, { containerClass: 'theme-blue' });
 
     constructor(
-        public account: AccountApi,
         public url: UrlService,
 		private formBuilder: FormBuilder,
     ) { }
 
     ngOnInit(): void {
-        this.account.getDefaultAddress().pipe(takeUntil(this.destroy$)).subscribe(x => this.address = x);
-        this.account.getOrdersList({limit: 3}).pipe(takeUntil(this.destroy$)).subscribe(x => this.orders = x.items);
-
 		this.searchForm = this.formBuilder.group({
 			customer: ['', Validators.required],
 			startDate: ['', Validators.required],

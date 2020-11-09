@@ -1,10 +1,7 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { AccountApi } from '../../../api/base';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { Address } from '../../../interfaces/address';
 import { UrlService } from '../../../services/url.service';
-import { Order } from '../../../interfaces/order';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { PerfectScrollbarConfigInterface, PerfectScrollbarComponent, PerfectScrollbarDirective } from 'ngx-perfect-scrollbar';
@@ -18,15 +15,11 @@ export class CartComponent implements OnInit, OnDestroy {
     private destroy$: Subject<void> = new Subject<void>();
 
 	data:any;
-	row:any;
 	rows: any[] = [];
-	deleteRow:any;
 	temp = [];
 	temp2 = this.rows;
 	tableLimit:number = 10;
 	selectEntry:any = 10;
-    address: Address;
-    orders: Order[] = [];
 	public config: PerfectScrollbarConfigInterface = { suppressScrollY : true };
 	@ViewChild(PerfectScrollbarComponent) componentRef?: PerfectScrollbarComponent;
 	@ViewChild(PerfectScrollbarDirective, { static: true }) directiveRef?: PerfectScrollbarDirective;
@@ -34,14 +27,10 @@ export class CartComponent implements OnInit, OnDestroy {
 	bsConfig: Partial<BsDatepickerConfig> = Object.assign({}, { containerClass: 'theme-blue' });
 
     constructor(
-        public account: AccountApi,
         public url: UrlService,
     ) { }
 
     ngOnInit(): void {
-        this.account.getDefaultAddress().pipe(takeUntil(this.destroy$)).subscribe(x => this.address = x);
-        this.account.getOrdersList({limit: 3}).pipe(takeUntil(this.destroy$)).subscribe(x => this.orders = x.items);
-
 		this.rows = [
 			{ "custCode": "888", "date": "2020-11-05", "partNumber": "123112", "partDescription": "Testing 1", "price": "12", "qty": "1", "total": "120"},
 			{ "custCode": "888", "date": "2020-11-06", "partNumber": "123113", "partDescription": "Testing 2", "price": "5", "qty": "2", "total": "120"},

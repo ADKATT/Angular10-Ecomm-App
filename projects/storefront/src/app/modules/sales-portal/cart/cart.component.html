@@ -1,14 +1,10 @@
 <app-block-header
     pageTitle="Cart"
+    [breadcrumb]="[
+        {label: 'Home', url: ''},
+        {label: 'Cart', url: ''}
+    ]"
 ></app-block-header>
-<!-- <app-block-header -->
-    <!-- pageTitle="Locations" -->
-    <!-- [breadcrumb]="[ -->
-        <!-- {label: 'Home', url: ''}, -->
-        <!-- {label: 'Breadcrumb', url: ''}, -->
-        <!-- {label: 'Current Page', url: ''} -->
-    <!-- ]" -->
-<!-- ></app-block-header> -->
 <div class="block">
     <div class="container">
         <div class="card contacts">
@@ -96,7 +92,7 @@
 								{{row.price}}
 							</ng-template>
 						</ngx-datatable-column>
-						<ngx-datatable-column name="QTY" [flexGrow]="1" [minWidth]="60" [maxWidth]="60">
+						<ngx-datatable-column name="QTY" [flexGrow]="1" [minWidth]="80" [maxWidth]="100">
 							<ng-template ngx-datatable-cell-template let-row="row">
 								{{row.qty}}
 							</ng-template>

@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { mustMatchValidator } from '../../../../functions/validators/must-match';
 import { Subject } from 'rxjs';
 import { finalize, takeUntil } from 'rxjs/operators';
-import { AccountApi } from '../../../../api/base';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
@@ -22,7 +21,6 @@ export class ChatEmailTimeComponent implements OnInit, OnDestroy {
 	timeCounts = [5 ,10,  15, 20, 25, 30, 35, 40, 45, 50, 55 ,60]; 
 
     constructor(
-        private account: AccountApi,
         private toastr: ToastrService,
         private translate: TranslateService,
         private fb: FormBuilder,
@@ -39,13 +37,15 @@ export class ChatEmailTimeComponent implements OnInit, OnDestroy {
         this.destroy$.complete();
     }
 
+	// form control
 	get f() { 
 		return this.statusForm.controls; 
 	}
 
+	// Save funtion
     save(): void {
 		this.submitted = true;
-		console.log(this.statusForm);
+
         if (this.statusForm.invalid) {
             return;
         }

@@ -8,7 +8,6 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { SharedModule } from '../shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { LayoutComponent } from './layout/layout.component';
 import { SalesPortalRoutingModule } from './sales-portal-routing.module';
 import { SalesPersonChatComponent } from './sales-person-chat/sales-person-chat.component';
 import { AskPriceComponent } from './ask-price/ask-price.component';
@@ -23,7 +22,7 @@ import { ChatEmailTimeComponent } from './settings/chat-email-time/chat-email-ti
 import { CustomerStatsComponent } from './customer-stats/customer-stats.component';
 
 @NgModule({
-	declarations: [LayoutComponent, SalesPersonChatComponent, AskPriceComponent, CartComponent, ChatEmailTimeComponent,SetStatusComponent, OrderHistoryComponent, QuoteHistoryComponent, ChatHistoryComponent, SearchHistoryComponent, AssignChatHistoryComponent, CustomerStatsComponent],
+	declarations: [SalesPersonChatComponent, AskPriceComponent, CartComponent, ChatEmailTimeComponent,SetStatusComponent, OrderHistoryComponent, QuoteHistoryComponent, ChatHistoryComponent, SearchHistoryComponent, AssignChatHistoryComponent, CustomerStatsComponent],
 	imports: [
 		CommonModule,
 		FormsModule,

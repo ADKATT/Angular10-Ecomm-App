@@ -1,14 +1,10 @@
 <app-block-header
     pageTitle="Set Status"
+    [breadcrumb]="[
+        {label: 'Home', url: ''},
+        {label: 'Set Status', url: ''}
+    ]"
 ></app-block-header>
-<!-- <app-block-header -->
-    <!-- pageTitle="Locations" -->
-    <!-- [breadcrumb]="[ -->
-        <!-- {label: 'Home', url: ''}, -->
-        <!-- {label: 'Breadcrumb', url: ''}, -->
-        <!-- {label: 'Current Page', url: ''} -->
-    <!-- ]" -->
-<!-- ></app-block-header> -->
 <div class="block">
     <div class="container container--max--lg">
         <div class="card contacts">
@@ -34,11 +30,6 @@
 						<div class="form-group" *ngIf="showTime">
 							<label for="password-current">Hours <span class="text-danger">*</span></label>
 							<input type="time" class="form-control" formControlName="hours">
-							<!-- <div class="is-invalid" *ngIf="submitted && f.hours.errors"> -->
-								<!-- <div class="text-danger" *ngIf="f.hours.errors.required"> -->
-									<!-- Hours is required -->
-								<!-- </div> -->
-							<!-- </div> -->
 						</div>
 
 						<div class="form-group mb-0">

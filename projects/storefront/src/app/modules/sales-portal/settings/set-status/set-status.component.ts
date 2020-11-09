@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { mustMatchValidator } from '../../../../functions/validators/must-match';
 import { Subject } from 'rxjs';
 import { finalize, takeUntil } from 'rxjs/operators';
-import { AccountApi } from '../../../../api/base';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
@@ -25,7 +24,6 @@ export class SetStatusComponent implements OnInit, OnDestroy {
 	bsConfig: Partial<BsDatepickerConfig> = Object.assign({}, { containerClass: 'theme-blue' });
 
     constructor(
-        private account: AccountApi,
         private toastr: ToastrService,
         private translate: TranslateService,
         private fb: FormBuilder,

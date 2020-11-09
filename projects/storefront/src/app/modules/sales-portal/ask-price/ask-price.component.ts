@@ -1,10 +1,7 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { AccountApi } from '../../../api/base';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { Address } from '../../../interfaces/address';
 import { UrlService } from '../../../services/url.service';
-import { Order } from '../../../interfaces/order';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { PerfectScrollbarConfigInterface, PerfectScrollbarComponent, PerfectScrollbarDirective } from 'ngx-perfect-scrollbar';
@@ -25,8 +22,6 @@ export class AskPriceComponent implements OnInit, OnDestroy {
 	temp2 = this.rows;
 	tableLimit:number = 10;
 	selectEntry:any = 10;
-    address: Address;
-    orders: Order[] = [];
 	public config: PerfectScrollbarConfigInterface = { suppressScrollY : true };
 	@ViewChild(PerfectScrollbarComponent) componentRef?: PerfectScrollbarComponent;
 	@ViewChild(PerfectScrollbarDirective, { static: true }) directiveRef?: PerfectScrollbarDirective;
@@ -34,14 +29,11 @@ export class AskPriceComponent implements OnInit, OnDestroy {
 	bsConfig: Partial<BsDatepickerConfig> = Object.assign({}, { containerClass: 'theme-blue' });
 
     constructor(
-        public account: AccountApi,
         public url: UrlService,
     ) { }
 
+	//Init function
     ngOnInit(): void {
-        this.account.getDefaultAddress().pipe(takeUntil(this.destroy$)).subscribe(x => this.address = x);
-        this.account.getOrdersList({limit: 3}).pipe(takeUntil(this.destroy$)).subscribe(x => this.orders = x.items);
-
 		this.rows = [
 			{ "date": "09/30/2020", "custCode": "LN99", "customerName": "Eugene Auto", "partNumber": "06E145100T"},
 			{ "date": "10/30/2020", "custCode": "LN92", "customerName": "John", "partNumber": "34216775346P"},
@@ -74,7 +66,8 @@ export class AskPriceComponent implements OnInit, OnDestroy {
 			this.tableLimit = event.target.value;
 		}
 	}
-
+	
+	//Datatable filter
 	updateFilter(event) {
 		const val = event.target.value.toLowerCase();
 
@@ -92,6 +85,7 @@ export class AskPriceComponent implements OnInit, OnDestroy {
 		//this.table.offset = 0;
 	}
 
+	//
     ngOnDestroy(): void {
         this.destroy$.next();
         this.destroy$.complete();

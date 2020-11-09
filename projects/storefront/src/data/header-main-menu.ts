@@ -65,7 +65,7 @@ export const mainMenu: MainMenuLink[] = [
 				{title: 'Cart', url: '/sales-portal/cart'},
                 {
                     title: 'History',
-                    url: '/history',
+                    url: '/sales-portal/order-history',
                     links: [
                         {title: 'Order History', url: '/sales-portal/order-history'},
                         {title: 'Quote History', url: '/sales-portal/quote-history'},

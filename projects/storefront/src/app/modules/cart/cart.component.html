@@ -1,14 +1,10 @@
-<ng-container *ngIf="cart.items.length <= 0">
-    <app-block-space layout="before-footer"></app-block-space>
+<ng-container *ngIf="cart.items.length <= 0">	
 	<app-block-header
+        [breadcrumb]="[
+			{label: 'Home', url: '/'},
+			{label: 'Cart', url: ''}
+		]"
     ></app-block-header>
-	
-	<!-- <app-block-header -->
-        <!-- [breadcrumb]="[ -->
-            <!-- {label: 'LINK_HOME'|translate, url: url.home()}, -->
-            <!-- {label: 'LINK_CART'|translate, url: url.cart()} -->
-        <!-- ]" -->
-    <!-- ></app-block-header> -->
 
     <div class="block-empty">
         <div class="container">
