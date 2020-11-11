@@ -54,10 +54,8 @@ export class SetStatusComponent implements OnInit, OnDestroy {
 		const newVal = event.target.value;
 		if (newVal === 'time') {
 			this.showTime = true;
-			// this.statusForm.controls["hours"].setValidators([Validators.required]);
 		} else {
 			this.showTime = false;
-			// this.statusForm.controls["hours"].clearValidators([Validators.required]);
 		}
 	}
   

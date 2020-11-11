@@ -86,6 +86,29 @@ const routes: Routes = [
                 loadChildren: () => import('./modules/sales-portal/sales-portal.module').then(m => m.SalesPortalModule),
             },
 			{
+                path: 'quote-history',
+                loadChildren: () => import('./modules/quote-history/quote-history.module').then(m => m.QuoteHistoryModule),
+            },
+			{
+                path: 'purchased-price-history',
+                loadChildren: () => import('./modules/purchased-price-history/purchased-price-history.module').then(m => m.PurchasedPriceHistoryModule),
+            },
+			{
+                path: 'ask-price-pending',
+                loadChildren: () => import('./modules/ask-price-pending/ask-price-pending.module').then(
+				m => m.AskPricePendingModule),
+            },
+			{
+                path: 'recent-searches',
+                loadChildren: () => import('./modules/recent-searches/recent-searches.module').then(
+				m => m.RecentSearchesModule),
+            },
+			{
+                path: 'customer-chat-history',
+                loadChildren: () => import('./modules/customer-chat-history/customer-chat-history.module').then(
+				m => m.CustomerChatHistoryModule),
+            },
+			{
                 path: 'reset-password',
                 loadChildren: () => import('./modules/reset-password/reset-password.module').then(m => m.ResetPasswordModule),
             },

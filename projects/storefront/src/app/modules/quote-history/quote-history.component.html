@@ -1,0 +1,110 @@
+<app-block-header
+    pageTitle="Quote History"
+    [breadcrumb]="[
+        {label: 'Home', url: ''},
+        {label: 'Quote History', url: ''}
+    ]"
+></app-block-header>
+<div class="block">
+    <div class="container">
+        <div class="card contacts">
+            <div class="card-body card-body--padding--2">
+                <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+					<div class="row">
+						<div class="col-md-3 col-12">
+							<label>Start Date</label>
+							<input type="text" class="form-control" #dp="bsDatepicker" formControlName="startDate" placeholder="Start Date" [ngClass]="{ 'is-invalid': submitted && f.startDate.errors }" [bsConfig]="bsConfig" bsDatepicker>
+							<small class="form-text text-muted" *ngIf="submitted && f.startDate.errors" >
+								<div class="text-danger" *ngIf="f.startDate.errors.required">Start Date is required</div>
+							</small>
+						</div>
+						<div class="col-md-3 col-12">
+							<label>End Date</label>
+							<input type="text" class="form-control" 
+							#dp="bsDatepicker" formControlName="endDate" 
+							placeholder="End Date" [bsConfig]="bsConfig" bsDatepicker [ngClass]="{ 'is-invalid': submitted && f.endDate.errors }">
+							<small class="form-text text-muted" *ngIf="submitted && f.endDate.errors" >
+								<div class="text-danger" *ngIf="f.endDate.errors.required">End Date is required</div>
+							</small>
+						</div>
+						<div class="col-md-6">
+							<button type="submit" class="btn btn-primary mt-4 mr-4">Search</button>
+							<!-- <button type="button" class="btn btn-primary mt-4 mr-2" (click)="allOrder()">All Quote</button> -->
+							<button type="button" class="btn btn-primary mt-4" (click)="todayQuote()">Today's Quote</button>
+						</div>
+					</div>
+				</form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="block mt-3">
+    <div class="container">
+        <div class="card contacts">
+            <div class="card-body card-body--padding--2">
+                <div class="row mt-1">
+					<div class="col-12 col-sm-12 col-md-6">
+						<h5 class="searchbar">Show:<select class="select-box" (change)="setLimit($event)" [value]="selectEntry" style="padding: 4px; margin: 0px auto; margin-left: 8px; width: 100px; border-radius: .22rem; border: 1px solid #BABFC7;">
+							<option value="all">All</option>
+							<option value="10">10</option>
+							<option value="20">20</option>
+							<option value="50">50</option>
+							<option value="100">100</option>
+						</select> entries</h5>
+					</div>
+					<div class="col-12 col-sm-12 col-md-6">
+						<div class="dataTables_filter float-right">
+							<h5 class="searchbar">Search:
+								<input type="text" placeholder="Search" (keyup)='updateFilter($event)' style="padding: 4px; margin: 0px auto; margin-left: 8px; width: 200px; border-radius: .22rem; border: 1px solid #BABFC7;">
+							</h5>
+						</div>
+					</div>
+				</div>
+
+				<div class="table table-striped table-bordered base-style">	
+					<ngx-datatable #table class="bootstrap ps" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="tableLimit" fxFlex="auto" [perfectScrollbar]="config" [scrollbarH]="true">
+
+						<ngx-datatable-column name="Item" [flexGrow]="1" [minWidth]="100">
+							<ng-template let-row="row" ngx-datatable-cell-template>
+								<img src="{{row.item}}" width="50" height="50" />
+							</ng-template>
+						</ngx-datatable-column>
+						<ngx-datatable-column name="Part Number" [flexGrow]="1" [minWidth]="150">
+							<ng-template ngx-datatable-cell-template let-row="row">
+								{{row.partNumber}}
+							</ng-template>
+						</ngx-datatable-column>
+						<ngx-datatable-column name="Part Description" [flexGrow]="1" [minWidth]="250">
+							<ng-template ngx-datatable-cell-template let-row="row">
+								{{row.partDescription}}
+							</ng-template>
+						</ngx-datatable-column>
+						<ngx-datatable-column name="Price" [flexGrow]="1" [minWidth]="120">
+							<ng-template ngx-datatable-cell-template let-row="row">
+								{{row.price}}
+							</ng-template>
+						</ngx-datatable-column>
+						<ngx-datatable-column name="Date" [flexGrow]="1" [minWidth]="150">
+							<ng-template ngx-datatable-cell-template let-row="row">
+								{{row.date}}
+							</ng-template>
+						</ngx-datatable-column>
+						<ngx-datatable-column name="QTY" [flexGrow]="1" [minWidth]="80" [maxWidth]="80">
+							<ng-template ngx-datatable-cell-template let-row="row">
+								<input type="number" class="form-control number" min="1" value="{{row.qty}}"  />
+							</ng-template>
+						</ngx-datatable-column>
+						<ngx-datatable-column name="Add To Cart" [flexGrow]="1" [minWidth]="150">
+							<ng-template ngx-datatable-cell-template let-row="row">
+								<i class="fas fa-shopping-cart"></i>
+								<!-- <app-product-card [product]="row"></app-product-card> -->
+							</ng-template>
+						</ngx-datatable-column>
+					</ngx-datatable>
+				</div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-block-space layout="before-footer"></app-block-space>

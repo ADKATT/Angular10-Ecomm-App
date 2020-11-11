@@ -13,13 +13,18 @@
             <!-- </div> -->
         <!-- </div> -->
     <!-- </div> -->
+<app-block-header
+    pageTitle="Careers"
+    [breadcrumb]="[
+        {label: 'Home', url: ''},
+        {label: 'Careers', url: ''}
+    ]"
+></app-block-header>
 	<div class="card">
 		<div class="card-header">
 			<!-- <h5>{{ 'HEADER_ORDER_HISTORY'|translate }}</h5> -->
-			<h1 class="text-center mt-3">Careers</h1>
 		</div>
 		<ng-container *ngIf="list">
-			<div class="card-divider"></div>
 			<div class="card-table">
 				<div class="table-responsive-sm">
 					<table class="text-center">
