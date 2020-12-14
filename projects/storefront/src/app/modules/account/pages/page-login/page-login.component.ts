@@ -29,7 +29,7 @@ export class PageLoginComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.loginForm = this.fb.group({
-            email: ['red-parts@example.com', [Validators.required, Validators.email]],
+            email: ['admin@mailinator.com', [Validators.required, Validators.email]],
             password: ['123456', [Validators.required]],
             remember: [false],
         });
@@ -62,7 +62,7 @@ export class PageLoginComponent implements OnInit, OnDestroy {
             finalize(() => this.loginInProgress = false),
             takeUntil(this.destroy$),
         ).subscribe(
-            () => this.router.navigateByUrl('/account/dashboard'),
+           () => this.router.navigateByUrl('/account/dashboard'),
             error => {
                 if (error instanceof HttpErrorResponse) {
                     this.loginForm.setErrors({

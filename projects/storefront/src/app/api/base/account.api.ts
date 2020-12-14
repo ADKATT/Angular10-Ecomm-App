@@ -26,7 +26,7 @@ export abstract class AccountApi {
 
     abstract user$: Observable<User | null>;
 
-    abstract signIn(email: string, password: string): Observable<User>;
+    abstract signIn(email: string, password: string): Observable<void>;
 
     abstract signUp(email: string, password: string): Observable<User>;
 
@@ -53,4 +53,5 @@ export abstract class AccountApi {
     abstract getOrderById(id: number): Observable<Order>;
 
     abstract getOrderByToken(token: string): Observable<Order>;
+
 }

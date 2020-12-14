@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { AccountApi } from '../../../../api/base';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
+import { DataService } from '../../../../services/data.service';
+import {environment} from '../../../../../environments/environment';
 
 @Component({
     selector: 'app-account-menu',
@@ -19,6 +21,9 @@ export class AccountMenuComponent implements OnInit, OnDestroy {
     lastName$: Observable<string>;
     email$: Observable<string>;
     avatar$: Observable<string>;
+    role$: any =0;
+    token$: any;
+    backEndUrl: any;
 
     form: FormGroup;
 
@@ -32,17 +37,38 @@ export class AccountMenuComponent implements OnInit, OnDestroy {
         private fb: FormBuilder,
         public account: AccountApi,
         public router: Router,
+        private dataService: DataService,
     ) {
+		this.backEndUrl = environment.apiBckEndUrl;
         this.isAuth$ = this.account.user$.pipe(map(x => x !== null));
         this.firstName$ = this.account.user$.pipe(map(x => x ? x.firstName : null));
         this.lastName$ = this.account.user$.pipe(map(x => x ? x.lastName : null));
         this.email$ = this.account.user$.pipe(map(x => x ? x.email : null));
-        this.avatar$ = this.account.user$.pipe(map(x => x ? x.avatar : null));
+        this.avatar$ = this.account.user$.pipe(map(x => x ? x.avatar : null)); 
+        var user = JSON.parse(localStorage.getItem('user'));
+        this.dataService.role.subscribe(roleId => {
+            if(roleId != 'admin'){
+                localStorage.setItem('role', roleId);
+                this.role$ = localStorage.getItem('role');
+            }
+            else {
+                this.role$ = (user) ? user.role: 0;
+            }
+        });
+        this.dataService.token.subscribe(token => {
+            if(token != 'token'){
+                localStorage.setItem('token', token);
+                this.token$ = localStorage.getItem('token');
+            }
+            else {
+                this.token$ = (user) ? user.token: null;
+            }
+        });
     }
 
     ngOnInit(): void {
         this.form = this.fb.group({
-            email: ['red-parts@example.com', [Validators.required, Validators.email]],
+            email: ['admin@mailinator.com', [Validators.required, Validators.email]],
             password: ['123456', [Validators.required]],
         });
     }

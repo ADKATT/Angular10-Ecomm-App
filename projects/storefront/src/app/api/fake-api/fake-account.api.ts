@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
 import { AccountApi, EditAddressData, EditProfileData, GetOrdersListOptions } from '../base';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../../interfaces/user';
 import { tap } from 'rxjs/operators';
 import { Address } from '../../interfaces/address';
 import { OrdersList } from '../../interfaces/list';
+import { map } from 'rxjs/operators';
 import { Order } from '../../interfaces/order';
+import {environment} from '../../../environments/environment';
+import { DataService } from '../../services/data.service';
 import {
     accountChangePassword,
     accountEditProfile,
@@ -27,24 +31,33 @@ import {
 @Injectable()
 export class FakeAccountApi extends AccountApi {
     private userSubject: BehaviorSubject<User | null>;
-
+    apiUrl: any;
+	token: any;
     get user(): User | null { return this.userSubject.value; }
 
     readonly user$: Observable<User | null>;
 
-    constructor() {
+    constructor(private http: HttpClient, 
+                private dataService: DataService,) {
         super();
-
+        this.apiUrl = environment.apiUrl;
         const storedUser = localStorage.getItem('user');
 
         this.userSubject = new BehaviorSubject<User | null>(storedUser ? JSON.parse(storedUser) : null);
         this.user$ = this.userSubject.asObservable();
     }
 
-    signIn(email: string, password: string): Observable<User> {
-        return accountSignIn(email, password).pipe(
-            tap(user => this.setUser(user)),
-        );
+    signIn(email: string, password: string): Observable<void> {
+        // return accountSignIn(email, password).pipe(
+            // tap(user => this.setUser(user)),
+        // );
+        return this.http.post<any>(`${this.apiUrl}/api/login`, {email: email, password: password})
+            .pipe(map(user => {
+                if(user.success){
+					this.dataService.setRole(user.role, user.token);
+                    this.setUser(user);
+                }
+        }));
     }
 
     signUp(email: string, password: string): Observable<User> {
@@ -57,6 +70,22 @@ export class FakeAccountApi extends AccountApi {
         return accountSignOut().pipe(
             tap(() => this.setUser(null)),
         );
+		// var user = localStorage.getItem('user');
+		// if (user) {
+			// this.token = user.token;
+		// }
+		// let headers = {
+				// headers: new HttpHeaders({
+					// 'Content-Type': 'application/json',
+					// 'Authorization': 'bearer' +' '+ this.token
+				// })
+		// }
+	    // this.setUser(null);
+		// return this.http.post<any>(`${this.apiUrl}/api/logout`, {}, headers)
+            // .pipe(map(user => {
+				// console.log("test");
+                // this.setUser(null);
+        // }));
     }
 
     editProfile(data: EditProfileData): Observable<User> {
