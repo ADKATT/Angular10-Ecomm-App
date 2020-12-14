@@ -74,19 +74,24 @@
         <li><a routerLink="/search-inventory/" (click)="closeMenu.emit()">Search Inventory</a></li>
         <li><a routerLink="/cart/" (click)="closeMenu.emit()">Cart</a></li>
         <li><a routerLink="/order-history/" (click)="closeMenu.emit()">Order History</a></li>
-        <li><a routerLink="/quote-history/" (click)="closeMenu.emit()">Quote History</a></li>
-        <li><a routerLink="/purchased-price-history/" (click)="closeMenu.emit()">Purchased Price History</a></li>
-        <li><a routerLink="/ask-price-pending/" (click)="closeMenu.emit()">Ask Price Pending</a></li>
-        <li><a routerLink="/recent-searches/" (click)="closeMenu.emit()">Recent Searches</a></li>
-        <li><a routerLink="/customer-chat-history/" (click)="closeMenu.emit()">Chat History</a></li>
+        <li *ngIf="role$ == 5"><a routerLink="/quote-history/" (click)="closeMenu.emit()">Quote History</a></li>
+        <li *ngIf="role$ == 1"><a href="{{backEndUrl}}login?token={{token$}}" (click)="closeMenu.emit()">Admin Portal</a></li>
+		<li *ngIf="role$ == 4"><a href="{{backEndUrl}}login?token={{token$}}" (click)="closeMenu.emit()">Sales Portal</a></li>
+		<li *ngIf="role$ == 3"><a href="{{backEndUrl}}login?token={{token$}}" (click)="closeMenu.emit()">Manager Portal</a></li>
+		<li *ngIf="role$ == 5"><a routerLink="/purchased-price-history/" (click)="closeMenu.emit()">Purchased Price History</a></li>
+        <li *ngIf="role$ == 5"><a routerLink="/ask-price-pending/" (click)="closeMenu.emit()">Ask Price Pending</a></li>
+        <li *ngIf="role$ == 5"><a routerLink="/recent-searches/" (click)="closeMenu.emit()">Recent Searches</a></li>
+        <li *ngIf="role$ == 5"><a routerLink="/customer-chat-history/" (click)="closeMenu.emit()">Chat History</a></li>
+        <li *ngIf="role$ == 5"><a routerLink="/customer-chat-history/" (click)="closeMenu.emit()">Specials</a></li>
         <!-- <li><a routerLink="#" (click)="closeMenu.emit()">Specials</a></li> -->
         <li><a routerLink="/reset-password/" (click)="closeMenu.emit()">Change Password</a></li>
         <li><a routerLink="/search-inventory/" (click)="closeMenu.emit()">Sound Alert</a></li>
-		<!-- <li><a routerLink="#" (click)="closeMenu.emit()">Help</a></li> -->
+		<li *ngIf="role$ == 5"><a routerLink="#" (click)="closeMenu.emit()">Help</a></li>
     </ul>
     <div class="account-menu__divider"></div>
     <ul class="account-menu__links">
         <li><button type="button" (click)="logout();">{{ 'LINK_ACCOUNT_LOGOUT'|translate }}</button></li>
 		<li><a routerLink="#" (click)="logout();">Logout Everywhere</a></li>
+		<li *ngIf="role$ == 1"><a routerLink="#" (click)="logout();">Logout All</a></li>
     </ul>
 </ng-container>

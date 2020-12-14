@@ -45,7 +45,7 @@
             icon="person-32"
             [label]="(email$|async) || ('TEXT_INDICATOR_ACCOUNT_LABEL'|translate)"
             [value]="'TEXT_INDICATOR_ACCOUNT_VALUE'|translate"
-            trigger="click"
+            trigger="hover"
             #accountIndicator="indicator"
         >
             <app-account-menu (closeMenu)="accountIndicator.close()"></app-account-menu>
@@ -56,7 +56,7 @@
             [label]="'TEXT_INDICATOR_CART_LABEL'|translate"
             [value]="cart.subtotal$|async|currencyFormat"
             [counter]="cart.quantity$|async"
-            trigger="click"
+            trigger="hover"
             #cartIndicator="indicator"
         >
             <app-dropcart (closeMenu)="cartIndicator.close()"></app-dropcart>

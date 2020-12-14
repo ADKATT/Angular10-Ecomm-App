@@ -7,21 +7,21 @@ import { UrlService } from '../../../../services/url.service';
 import { Order } from '../../../../interfaces/order';
 
 @Component({
-    selector: 'app-page-dashboard',
-    templateUrl: './page-dashboard.component.html',
-    styleUrls: ['./page-dashboard.component.scss'],
+	selector: 'app-page-dashboard',
+	templateUrl: './page-dashboard.component.html',
+	styleUrls: ['./page-dashboard.component.scss'],
 })
 export class PageDashboardComponent implements OnInit, OnDestroy {
-    private destroy$: Subject<void> = new Subject<void>();
+	private destroy$: Subject<void> = new Subject<void>();
 
-    address: Address;
+	address: Address;
 
-    orders: Order[] = [];
+	orders: Order[] = [];
 
-    constructor(
-        public account: AccountApi,
-        public url: UrlService,
-    ) { }
+	constructor(
+		public account: AccountApi,
+		public url: UrlService,
+	) { }
 
     ngOnInit(): void {
         this.account.getDefaultAddress().pipe(takeUntil(this.destroy$)).subscribe(x => this.address = x);
