@@ -27,18 +27,16 @@ import {
     getOrdersList,
 } from '../../../fake-server/endpoints';
 
-
 @Injectable()
 export class FakeAccountApi extends AccountApi {
     private userSubject: BehaviorSubject<User | null>;
     apiUrl: any;
-	token: any;
+    token: any;
     get user(): User | null { return this.userSubject.value; }
 
     readonly user$: Observable<User | null>;
 
-    constructor(private http: HttpClient, 
-                private dataService: DataService,) {
+    constructor(private http: HttpClient, private dataService: DataService,) {
         super();
         this.apiUrl = environment.apiUrl;
         const storedUser = localStorage.getItem('user');
@@ -46,15 +44,16 @@ export class FakeAccountApi extends AccountApi {
         this.userSubject = new BehaviorSubject<User | null>(storedUser ? JSON.parse(storedUser) : null);
         this.user$ = this.userSubject.asObservable();
     }
+   
+    public get currentUserValue(): User {
+        return this.userSubject.value;
+    }
 
     signIn(email: string, password: string): Observable<void> {
-        // return accountSignIn(email, password).pipe(
-            // tap(user => this.setUser(user)),
-        // );
         return this.http.post<any>(`${this.apiUrl}/api/login`, {email: email, password: password})
             .pipe(map(user => {
                 if(user.success){
-					this.dataService.setRole(user.role, user.token);
+                    this.dataService.setRole(user.role, user.token);
                     this.setUser(user);
                 }
         }));
@@ -66,37 +65,59 @@ export class FakeAccountApi extends AccountApi {
         );
     }
 
-    signOut(): Observable<void> {
-        return accountSignOut().pipe(
-            tap(() => this.setUser(null)),
-        );
-		// var user = localStorage.getItem('user');
-		// if (user) {
-			// this.token = user.token;
-		// }
-		// let headers = {
-				// headers: new HttpHeaders({
-					// 'Content-Type': 'application/json',
-					// 'Authorization': 'bearer' +' '+ this.token
-				// })
-		// }
-	    // this.setUser(null);
-		// return this.http.post<any>(`${this.apiUrl}/api/logout`, {}, headers)
-            // .pipe(map(user => {
-				// console.log("test");
-                // this.setUser(null);
-        // }));
-    }
+	signOut(): Observable<void> {
+		return this.http.post<any>(`${this.apiUrl}/api/logout`, {})
+			.pipe(map(user => {
+				this.setUser(null);
+		}));
+		// return accountSignOut().pipe(
+		// tap(() => ),
+		// );  
+	}
 
-    editProfile(data: EditProfileData): Observable<User> {
-        return accountEditProfile(data).pipe(
-            tap(user => this.setUser(user)),
-        );
-    }
+	validateIP(): Observable<void> {
+		return this.http.get<any>(`${this.apiUrl}/api/validate-ip`)
+			.pipe(map(user => {
+				return user;
+		}));
+	}
 
-    changePassword(oldPassword: string, newPassword: string): Observable<void> {
-        return accountChangePassword(oldPassword, newPassword);
-    }
+	validToken(): Observable<void> {
+		return this.http.post<any>(`${this.apiUrl}/api/token-validate`, {})
+			.pipe(map(user => {
+				return user;
+		}));
+	}
+
+	getRole(): Observable<void> {
+		let users = JSON.parse(localStorage.getItem('user'));
+		return users.role;
+	}
+
+	getUserId(): Observable<void> {
+		let users = JSON.parse(localStorage.getItem('user'));
+		return users.id;
+	}
+
+	getcurrentUser(): Observable<void> {
+		return this.http.get<any>(`${this.apiUrl}/api/get-user-details?filter_column=user_code`)
+			.pipe(map(user => {
+				return user;
+		}));
+	}
+
+	editProfile(data: EditProfileData): Observable<User> {
+		return accountEditProfile(data).pipe(
+			tap(user => this.setUser(user)),
+		);
+	}
+
+	changePassword(value, filter_column, filter_value): Observable<void> {
+		return this.http.post<any>(`${this.apiUrl}/api/change-password?filter_column=${filter_column}&filter_value=${filter_value}`, value)
+			.pipe(map(res => {
+				return res;
+		}));
+	}
 
     addAddress(data: EditAddressData): Observable<Address> {
         return addAddress(data);

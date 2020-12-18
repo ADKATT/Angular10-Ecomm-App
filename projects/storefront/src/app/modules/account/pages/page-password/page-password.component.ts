@@ -51,7 +51,7 @@ export class PagePasswordComponent implements OnInit, OnDestroy {
 
         this.account.changePassword(
             this.form.value.currentPassword,
-            this.form.value.newPassword,
+            this.form.value.newPassword,'id'
         ).pipe(
             finalize(() => this.saveInProgress = false),
             takeUntil(this.destroy$),

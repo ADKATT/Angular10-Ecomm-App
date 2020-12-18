@@ -8,7 +8,7 @@ import { TranslateModule } from '@ngx-translate/core';
 // modules
 import { AccountRoutingModule } from './account-routing.module';
 import { SharedModule } from '../shared/shared.module';
-
+import { ModalModule } from 'ngx-bootstrap/modal';
 // components
 import { LayoutComponent } from './components/layout/layout.component';
 
@@ -42,6 +42,7 @@ import { PageProfileComponent } from './pages/page-profile/page-profile.componen
         // modules (angular)
         CommonModule,
         FormsModule,
+        ModalModule.forRoot(),
         ReactiveFormsModule,
         // modules (third-party)
         TranslateModule.forChild(),

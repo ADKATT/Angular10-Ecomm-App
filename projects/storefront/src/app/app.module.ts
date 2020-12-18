@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { filter } from 'rxjs/operators';
 import { ViewportScroller } from '@angular/common';
 import { Router, Scroll, Event } from '@angular/router';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 // modules (angular)
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -27,7 +28,9 @@ import { RootComponent } from './components/root/root.component';
 
 // pages
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
-
+import { JwtInterceptor } from './_helpers/jwt.interceptor';
+import { ErrorInterceptor } from './_helpers/error.interceptor';
+import { fakeBackendProvider } from './_helpers/fake-backend';
 
 @NgModule({
     declarations: [
@@ -116,6 +119,11 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
         MobileModule,
         SharedModule,
     ],
+	providers: [
+		{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+		{ provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+		fakeBackendProvider
+	],
 })
 export class AppModule {
     constructor(router: Router, viewportScroller: ViewportScroller) {
