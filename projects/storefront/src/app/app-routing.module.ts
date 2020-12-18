@@ -2,14 +2,14 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { RootComponent } from './components/root/root.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+import { IpBlockComponent } from './modules/ip-block/ip-block.component';
 
 const routes: Routes = [
     /**
      * ROUTES_ONLY_FOR_DEMO / START
      */
     // Desktop header variations.
-    // {path: 'header-spaceship-variant-one',   component: RootComponent, data: {desktopHeader: 'spaceship/one'}},
-    // {path: 'header-spaceship-variant-two',   component: RootComponent, data: {desktopHeader: 'spaceship/two'}},
+    {path: 'ip-block',   component: IpBlockComponent, data: {desktopHeader: 'Block ip'}},
     // {path: 'header-spaceship-variant-three', component: RootComponent, data: {desktopHeader: 'spaceship/three'}},
     // {path: 'header-classic-variant-one',     component: RootComponent, data: {desktopHeader: 'classic/one'}},
     // {path: 'header-classic-variant-two',     component: RootComponent, data: {desktopHeader: 'classic/two'}},
@@ -108,7 +108,7 @@ const routes: Routes = [
                 loadChildren: () => import('./modules/customer-chat-history/customer-chat-history.module').then(
 				m => m.CustomerChatHistoryModule),
             },
-			{
+            {
                 path: 'reset-password',
                 loadChildren: () => import('./modules/reset-password/reset-password.module').then(m => m.ResetPasswordModule),
             },

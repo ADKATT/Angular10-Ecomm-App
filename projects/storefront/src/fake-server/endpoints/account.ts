@@ -19,11 +19,14 @@ function delayResponse<T>(input: Observable<T>): Observable<T> {
 export function accountSignIn(email: string, password: string): Observable<User> {
     if (email === 'red-parts@example.com' && password === '123456') {
         const user: User = {
-            email: 'red-parts@example.com',
+            email: 'nsi@example.com',
             phone: '38 972 588-42-36',
             firstName: 'Ryan',
             lastName: 'Ford',
-            avatar: '//www.gravatar.com/avatar/bde30b7dd579b3c9773f80132523b4c3?d=mp&s=88',
+			user: '',
+			profileImage: '\assets\images\avatars\avatar.png',
+            avatar: '\assets\images\avatars\avatar.png',
+			token: ''
         };
 
         return delayResponse(of(user));
@@ -50,7 +53,10 @@ export function accountSignUp(email: string, password: string): Observable<User>
         phone: '38 972 588-42-36',
         firstName: 'Ryan',
         lastName: 'Ford',
-        avatar: '//www.gravatar.com/avatar/bde30b7dd579b3c9773f80132523b4c3?d=mp&s=88',
+		user: '',
+		profileImage: '\assets\images\avatars\avatar.png',
+        avatar: '\assets\images\avatars\avatar.png',
+		token: ''
     };
 
     return delayResponse(of(user));
@@ -66,7 +72,10 @@ export function accountEditProfile(data: EditProfileData): Observable<User> {
         phone: data.phone,
         firstName: data.firstName,
         lastName: data.lastName,
-        avatar: '//www.gravatar.com/avatar/bde30b7dd579b3c9773f80132523b4c3?d=mp&s=88',
+		user: '',
+		profileImage: '\assets\images\avatars\avatar.png',
+        avatar: '\assets\images\avatars\avatar.png',
+		token: ''
     };
 
     return delayResponse(of(user));

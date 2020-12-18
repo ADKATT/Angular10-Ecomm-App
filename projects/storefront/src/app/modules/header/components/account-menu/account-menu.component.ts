@@ -21,9 +21,11 @@ export class AccountMenuComponent implements OnInit, OnDestroy {
     lastName$: Observable<string>;
     email$: Observable<string>;
     avatar$: Observable<string>;
+    fullName$: Observable<string>;
     role$: any =0;
     token$: any;
     backEndUrl: any;
+	apiFileUrl: any;
 
     form: FormGroup;
 
@@ -39,12 +41,14 @@ export class AccountMenuComponent implements OnInit, OnDestroy {
         public router: Router,
         private dataService: DataService,
     ) {
+		this.apiFileUrl = environment.apiFileUrl;
 		this.backEndUrl = environment.apiBckEndUrl;
         this.isAuth$ = this.account.user$.pipe(map(x => x !== null));
         this.firstName$ = this.account.user$.pipe(map(x => x ? x.firstName : null));
         this.lastName$ = this.account.user$.pipe(map(x => x ? x.lastName : null));
+        this.fullName$ = this.account.user$.pipe(map(x => x ? x.user : null));
         this.email$ = this.account.user$.pipe(map(x => x ? x.email : null));
-        this.avatar$ = this.account.user$.pipe(map(x => x ? x.avatar : null)); 
+        this.avatar$ = this.account.user$.pipe(map(x => x ? x.profileImage : null)); 
         var user = JSON.parse(localStorage.getItem('user'));
         this.dataService.role.subscribe(roleId => {
             if(roleId != 'admin'){
@@ -64,6 +68,7 @@ export class AccountMenuComponent implements OnInit, OnDestroy {
                 this.token$ = (user) ? user.token: null;
             }
         });
+        this.validateIP();
     }
 
     ngOnInit(): void {
@@ -76,6 +81,28 @@ export class AccountMenuComponent implements OnInit, OnDestroy {
     ngOnDestroy(): void {
         this.destroy$.next();
         this.destroy$.complete();
+    }
+
+    validateIP(): void {
+        this.account.validateIP().pipe(
+            finalize(() => this.loginInProgress = false),
+            takeUntil(this.destroy$),
+        ).subscribe(
+            (data: any) => {
+                if (data.status != 'success') {
+                    this.router.navigate(['ip-block']);
+                }
+            },
+            error => {
+                if (error instanceof HttpErrorResponse) {
+                    this.form.setErrors({
+                        server: `ERROR_API_${error.error.message}`,
+                    });
+                } else {
+                    console.log(error);
+                }
+            },
+        );
     }
 
     login(): void {
@@ -104,7 +131,7 @@ export class AccountMenuComponent implements OnInit, OnDestroy {
                         server: `ERROR_API_${error.error.message}`,
                     });
                 } else {
-                    alert(error);
+                    console.log(error);
                 }
             },
         );

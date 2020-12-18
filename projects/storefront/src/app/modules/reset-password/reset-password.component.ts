@@ -44,33 +44,38 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
 		return this.form.controls; 
 	}
 
-    save(): void {
+	save(): void {
 		this.submitted = true;
 
-        if (this.form.invalid) {
-            return;
-        }
-		
-		console.log(this.form);
-        // this.account.changePassword(
-            // this.form.value.currentPassword,
-            // this.form.value.newPassword,
-        // ).pipe(
-            // finalize(() => this.saveInProgress = false),
-            // takeUntil(this.destroy$),
-        // ).subscribe(
-            // () => {
-                // this.toastr.success(this.translate.instant('TEXT_TOAST_PASSWORD_CHANGED'));
-            // },
-            // error => {
-                // if (error instanceof HttpErrorResponse) {
-                    // this.form.setErrors({
-                        // server: `ERROR_API_${error.error.message}`,
-                    // });
-                // } else {
-                    // alert(error);
-                // }
-            // },
-        // );
-    }
+		if (this.form.invalid) {
+			return;
+		}
+
+		this.account.changePassword({'currentPassword': this.form.value.currentPassword, 'newPassword': this.form.value.newPassword}, 'id', this.account.getUserId()).pipe(takeUntil(this.destroy$),
+		).subscribe(
+			(res: any) => {
+				if (res.success) {
+					if (res.data == 'Invalid Password') {
+						this.toastr.error('Current Password Invalid');
+					}
+					else {
+						this.form.reset();
+						this.submitted = false;
+						this.toastr.success(this.translate.instant('TEXT_TOAST_PASSWORD_CHANGED'));
+					}
+				} else {
+					this.toastr.error('Error to change password');
+				}
+			},
+			error => {
+				if (error instanceof HttpErrorResponse) {
+					this.form.setErrors({
+						server: `ERROR_API_${error.error.message}`,
+					});
+				} else {
+					console.log(error);
+				}
+			},
+		);
+	}
 }

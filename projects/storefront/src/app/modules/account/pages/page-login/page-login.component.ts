@@ -29,7 +29,7 @@ export class PageLoginComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.loginForm = this.fb.group({
-            email: ['admin@mailinator.com', [Validators.required, Validators.email]],
+            email: ['admin@mailinator.com', [Validators.required]],
             password: ['123456', [Validators.required]],
             remember: [false],
         });
@@ -69,7 +69,7 @@ export class PageLoginComponent implements OnInit, OnDestroy {
                         server: `ERROR_API_${error.error.message}`,
                     });
                 } else {
-                    alert(error);
+                    console.log(error);
                 }
             },
         );
@@ -98,7 +98,7 @@ export class PageLoginComponent implements OnInit, OnDestroy {
                         server: `ERROR_API_${error.error.message}`,
                     });
                 } else {
-                    alert(error);
+                    console.log(error);
                 }
             },
         );

@@ -32,9 +32,23 @@ export abstract class AccountApi {
 
     abstract signOut(): Observable<void>;
 
+    abstract validateIP(): Observable<void>;
+
+    abstract validToken(): Observable<void>;
+
+    abstract validToken(): Observable<void>;
+
+    abstract getRole(): Observable<void>;
+
+    abstract getUserId(): Observable<void>;
+
+    abstract getcurrentUser(): Observable<void>;
+
+    abstract get currentUserValue(): User | null;
+
     abstract editProfile(data: EditProfileData): Observable<User>;
 
-    abstract changePassword(oldPassword: string, newPassword: string): Observable<void>;
+    abstract changePassword(value, filter_column, filter_value): Observable<void>;
 
     abstract addAddress(data: EditAddressData): Observable<Address>;
 
