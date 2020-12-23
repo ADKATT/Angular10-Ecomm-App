@@ -42,7 +42,7 @@ export class AccountMenuComponent implements OnInit, OnDestroy {
         private dataService: DataService,
     ) {
 		this.apiFileUrl = environment.apiFileUrl;
-		this.backEndUrl = environment.apiBckEndUrl;
+		this.backEndUrl = environment.apiBackEndUrl;
         this.isAuth$ = this.account.user$.pipe(map(x => x !== null));
         this.firstName$ = this.account.user$.pipe(map(x => x ? x.firstName : null));
         this.lastName$ = this.account.user$.pipe(map(x => x ? x.lastName : null));
