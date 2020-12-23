@@ -76,9 +76,9 @@
         <li><a routerLink="/cart/" (click)="closeMenu.emit()">Cart</a></li>
         <li><a routerLink="/order-history/" (click)="closeMenu.emit()">Order History</a></li>
         <li *ngIf="role$ == 5"><a routerLink="/quote-history/" (click)="closeMenu.emit()">Quote History</a></li>
-        <li *ngIf="role$ == 1"><a href="{{backEndUrl}}dashboard/sales?token={{token$}}" (click)="closeMenu.emit()">Admin Portal</a></li>
-		<li *ngIf="role$ == 4"><a href="{{backEndUrl}}dashboard/sales?token={{token$}}" (click)="closeMenu.emit()">Sales Portal</a></li>
-		<li *ngIf="role$ == 3"><a href="{{backEndUrl}}dashboard/sales?token={{token$}}" (click)="closeMenu.emit()">Manager Portal</a></li>
+        <li *ngIf="role$ == 1"><a href="{{backEndUrl}}dashboard/sales?token={{token$}}" (click)="closeMenu.emit()" target="_blank">Admin Portal</a></li>
+		<li *ngIf="role$ == 4"><a href="{{backEndUrl}}dashboard/sales?token={{token$}}" (click)="closeMenu.emit()" target="_blank">Sales Portal</a></li>
+		<li *ngIf="role$ == 3"><a href="{{backEndUrl}}dashboard/sales?token={{token$}}" (click)="closeMenu.emit()" target="_blank">Manager Portal</a></li>
 		<li *ngIf="role$ == 5"><a routerLink="/purchased-price-history/" (click)="closeMenu.emit()">Purchased Price History</a></li>
         <li *ngIf="role$ == 5"><a routerLink="/ask-price-pending/" (click)="closeMenu.emit()">Ask Price Pending</a></li>
         <li *ngIf="role$ == 5"><a routerLink="/recent-searches/" (click)="closeMenu.emit()">Recent Searches</a></li>
