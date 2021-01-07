@@ -8,16 +8,16 @@
   "files": [],
   "references": [
     {
-      "path": "./projects/storefront/tsconfig.app.json"
+      "path": "./src/tsconfig.app.json"
     },
     {
-      "path": "./projects/storefront/tsconfig.spec.json"
+      "path": "./src/tsconfig.spec.json"
     },
     {
-      "path": "./projects/storefront/e2e/tsconfig.json"
+      "path": "./e2e/tsconfig.json"
     },
     {
-      "path": "./projects/storefront/tsconfig.server.json"
+      "path": "./src/tsconfig.server.json"
     }
   ]
 }

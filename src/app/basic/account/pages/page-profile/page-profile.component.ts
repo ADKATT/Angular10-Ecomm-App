@@ -1,0 +1,57 @@
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+//import { AccountApi } from '../../../../api/base';
+import { UserService } from '../../../../services/user.service';
+import { finalize, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
+
+@Component({
+    selector: 'app-page-profile',
+    templateUrl: './page-profile.component.html',
+    styleUrls: ['./page-profile.component.scss'],
+})
+export class PageProfileComponent implements OnInit, OnDestroy {
+    private destroy$: Subject<void> = new Subject<void>();
+
+    form: FormGroup;
+    saveInProgress = false;
+
+    constructor(
+        private userService: UserService,
+        private fb: FormBuilder,
+        private toastr: ToastrService,
+        private translate: TranslateService,
+    ) { }
+
+    ngOnInit(): void {
+        this.form = this.fb.group({
+            firstName: [this.userService.user.firstName, [Validators.required]],
+            lastName: [this.userService.user.lastName, [Validators.required]],
+            email: [this.userService.user.email, [Validators.required, Validators.email]],
+            phone: [this.userService.user.phone, [Validators.required]],
+        });
+    }
+
+    ngOnDestroy(): void {
+        this.destroy$.next();
+        this.destroy$.complete();
+    }
+
+    save(): void {
+        this.form.markAllAsTouched();
+
+        if (this.saveInProgress || this.form.invalid){
+            return;
+        }
+
+        this.saveInProgress = true;
+        this.userService.editProfile(this.form.value).pipe(
+            finalize(() => this.saveInProgress = false),
+            takeUntil(this.destroy$),
+        ).subscribe(() => {
+            this.toastr.success(this.translate.instant('TEXT_TOAST_PROFILE_SAVED'));
+        });
+    }
+}

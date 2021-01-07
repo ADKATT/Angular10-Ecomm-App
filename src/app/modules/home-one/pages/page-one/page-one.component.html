@@ -1,0 +1,92 @@
+<app-block-finder *ngIf="permission && permission.finder == true"></app-block-finder>
+
+<app-block-features layout="top-strip" *ngIf="permission && permission.features == true"></app-block-features>
+
+<app-block-space layout="divider-nl" *ngIf="permission && permission.features == true"></app-block-space>
+
+<app-block-products-carousel *ngIf="permission && permission.products_carousel == true"
+    [blockTitle]="'HEADER_FEATURED_PRODUCTS'|translate"
+    layout="grid-5"
+    rows="1"
+    [loading]="this.featuredProducts.loading"
+    [products]="this.featuredProducts.products$|async"
+    [groups]="this.featuredProducts.groups"
+    (changeGroup)="groupChange(featuredProducts, $event)"
+></app-block-products-carousel>
+
+<app-block-space layout="divider-nl" *ngIf="permission && permission.products_carousel == true"></app-block-space>
+
+<app-block-sale *ngIf="permission && permission.sale_timer == true"
+    [loading]="blockSale.loading"
+    [products]="blockSale.data$|async"
+></app-block-sale>
+
+<app-block-space layout="divider-lg" *ngIf="permission && permission.sale_timer == true"></app-block-space>
+
+<ng-container *ngFor="let blockZone of blockZones; let last=last">
+    <app-block-zone *ngIf="permission && permission.blockZone == true"
+        [image]="blockZone.image"
+        [mobileImage]="blockZone.mobileImage"
+        [category]="blockZone.category$|async"
+    ></app-block-zone>
+    <app-block-space *ngIf="!last" layout="divider-sm"></app-block-space>
+</ng-container>
+
+<app-block-space layout="divider-nl" *ngIf="permission && permission.blockZone == true"></app-block-space>
+
+<app-block-banners *ngIf="permission && permission.banners == true"></app-block-banners>
+
+<app-block-space layout="divider-nl" *ngIf="permission && permission.banners == true"></app-block-space>
+
+<app-block-products-carousel *ngIf="permission && permission.products_new_arrival == true"
+    [blockTitle]="'HEADER_NEW_ARRIVALS'|translate"
+    layout="horizontal"
+    rows="2"
+    [loading]="newArrivals.loading"
+    [products]="newArrivals.data$|async"
+    [links]="[
+        {label: 'Wheel Covers', url: '/product'},
+        {label: 'Timing Belts', url: '/product'},
+        {label: 'Oil Pans', url: '/product'},
+        {label: 'Show All', url: '/product'}
+    ]"
+></app-block-products-carousel>
+
+<app-block-space layout="divider-nl" *ngIf="permission && permission.products_new_arrival == true"></app-block-space>
+
+<app-block-posts-carousel *ngIf="permission && permission.posts_carousel == true"
+    [label]="'HEADER_LATEST_NEWS'|translate"
+    layout="grid"
+    [loading]="latestPosts.loading"
+    [posts]="latestPosts.data$|async"
+    [links]="[
+        {label: 'Special Offers', url: '/blog'},
+        {label: 'New Arrivals', url: '/blog'},
+        {label: 'Reviews', url: '/blog'}
+    ]"
+></app-block-posts-carousel>
+
+<app-block-space layout="divider-nl" *ngIf="permission && permission.posts_carousel == true"></app-block-space>
+
+<app-block-brands layout="columns-8-full" *ngIf="permission && permission.brands == true" [brands]="brands$|async"></app-block-brands>
+
+<app-block-space class="d-xl-block d-none" layout="divider-nl" *ngIf="permission && permission.brands == true"></app-block-space>
+
+<app-block-products-columns *ngIf="permission && permission.products_columns == true"
+    [columns]="[
+        {
+            title: 'HEADER_TOP_RATED'|translate,
+            products: columnTopRated$|async
+        },
+        {
+            title: 'HEADER_SPECIAL_OFFERS'|translate,
+            products: columnSpecialOffers$|async
+        },
+        {
+            title: 'HEADER_BESTSELLERS'|translate,
+            products: columnBestsellers$|async
+        }
+    ]"
+></app-block-products-columns>
+
+<app-block-space layout="before-footer" *ngIf="permission && permission.products_columns == true"></app-block-space>

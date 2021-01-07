@@ -1,0 +1,22 @@
+<app-block-header
+    [pageTitle]="pageTitle$|async"
+    [breadcrumb]="breadcrumbs$|async"
+></app-block-header>
+
+<div class="block-split">
+    <div class="container">
+        <div class="block-split__row row no-gutters">
+            <div class="block-split__item block-split__item-content col-auto">
+                <div class="block">
+                    <app-products-view
+                        [layout]="layout"
+                        [gridLayout]="gridLayout"
+                        [offCanvasSidebar]="offCanvasSidebar"
+                    ></app-products-view>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-block-space layout="before-footer"></app-block-space>

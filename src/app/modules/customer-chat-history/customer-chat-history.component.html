@@ -1,0 +1,60 @@
+<app-block-header
+    pageTitle="Last Two Weeks Chat History"
+    [breadcrumb]="[
+        {label: 'Home', url: ''},
+        {label: 'Chat History', url: ''}
+    ]"
+></app-block-header>
+<div class="block mt-3">
+    <div class="container">
+        <div class="card contacts">
+            <div class="card-body card-body--padding--2">
+                <div class="row mt-1">
+					<div class="col-12 col-sm-12 col-md-6">
+						<h5 class="searchbar">Show:<select class="select-box" (change)="setLimit($event)" [value]="selectEntry" style="padding: 4px; margin: 0px auto; margin-left: 8px; width: 100px; border-radius: .22rem; border: 1px solid #BABFC7;">
+							<option value="all">All</option>
+							<option value="10">10</option>
+							<option value="20">20</option>
+							<option value="50">50</option>
+							<option value="100">100</option>
+						</select> entries</h5>
+					</div>
+					<div class="col-12 col-sm-12 col-md-6">
+						<div class="dataTables_filter float-right">
+							<h5 class="searchbar">Search:
+								<input type="text" placeholder="Search" (keyup)='updateFilter($event)' style="padding: 4px; margin: 0px auto; margin-left: 8px; width: 200px; border-radius: .22rem; border: 1px solid #BABFC7;">
+							</h5>
+						</div>
+					</div>
+				</div>
+
+				<div class="table table-striped table-bordered base-style">	
+					<ngx-datatable #table class="bootstrap ps" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="tableLimit" fxFlex="auto" [perfectScrollbar]="config" [scrollbarH]="true">
+
+						<ngx-datatable-column name="Customer Msg" [flexGrow]="1" [minWidth]="100">
+							<ng-template ngx-datatable-cell-template let-row="row">
+								{{row.customerMsg}}
+							</ng-template>
+						</ngx-datatable-column>
+						<ngx-datatable-column name="Salesperson" [flexGrow]="1" [minWidth]="250">
+							<ng-template ngx-datatable-cell-template let-row="row">
+								{{row.salesperson}}
+							</ng-template>
+						</ngx-datatable-column>
+						<ngx-datatable-column name="Salesperson Msg" [flexGrow]="1" [minWidth]="100">
+							<ng-template ngx-datatable-cell-template let-row="row">
+								{{row.salespersonMsg}}
+							</ng-template>
+						</ngx-datatable-column>
+						<ngx-datatable-column name="Date" [flexGrow]="1" [minWidth]="150">
+							<ng-template ngx-datatable-cell-template let-row="row">
+								{{row.date}}
+							</ng-template>
+						</ngx-datatable-column>
+					</ngx-datatable>
+				</div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-block-space layout="before-footer"></app-block-space>
