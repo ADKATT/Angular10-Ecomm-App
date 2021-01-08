@@ -13,6 +13,7 @@ import { BlockMapComponent } from './blocks/block-map/block-map.component';
 import { BlockReviewsComponent } from './blocks/block-reviews/block-reviews.component';
 import { BlockTeammatesComponent } from './blocks/block-teammates/block-teammates.component';
 import { CareersComponent } from './careers/careers.component';
+import { CareersApplyComponent } from './careers/careers-apply/careers-apply.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { CareersComponent } from './careers/careers.component';
 	BlockMapComponent, 
 	BlockReviewsComponent, 
 	BlockTeammatesComponent, 
-	CareersComponent
+	CareersComponent,
+	CareersApplyComponent,
   ],
   imports: [
     CommonModule,

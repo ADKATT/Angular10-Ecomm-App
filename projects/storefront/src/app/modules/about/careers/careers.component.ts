@@ -5,6 +5,7 @@ import { OrdersList } from '../../../interfaces/list';
 import { distinctUntilChanged, mergeMap, takeUntil } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
 import { UrlService } from '../../../services/url.service';
+import { CareersService } from '../../../services/careers.service';
 
 @Component({
 	selector: 'app-careers',
@@ -15,31 +16,30 @@ export class CareersComponent implements OnInit, OnDestroy {
     private destroy$: Subject<void> = new Subject<void>();
 
     currentPage: FormControl = new FormControl(1);
-    list: any;
+    list: any = [];
 
     constructor(
         private accountApi: AccountApi,
         public url: UrlService,
+        private careersService: CareersService,
     ) { }
 
     ngOnInit(): void {
-        this.list = [
-			{'location' : 'UK', 'position' : 'Manager'},
-			{'location' : 'US', 'position' : 'Sales Person'},
-			{'location' : 'US', 'position' : 'Manager'},
-			{'location' : 'UK', 'position' : 'Sales person'},
-		]
-		// merge(
-            // of(this.currentPage.value),
-            // this.currentPage.valueChanges,
-        // ).pipe(
-            // distinctUntilChanged(),
-            // mergeMap(page => this.accountApi.getOrdersList({
-                // limit: 5,
-                // page,
-            // })),
-            // takeUntil(this.destroy$),
-        // ).subscribe(x => this.list = x);
+        this.getAllCareers();
+    }
+
+    /**
+    * Get Careers
+    */
+    getAllCareers() {
+        this.careersService.getCareers().subscribe(
+            res => {
+                this.list = res.data.data;
+            },
+            err => {
+                console.log(err);
+            }
+        );
     }
 
     ngOnDestroy(): void {

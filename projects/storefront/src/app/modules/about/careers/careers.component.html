@@ -24,7 +24,7 @@
 		<div class="card-header">
 			<!-- <h5>{{ 'HEADER_ORDER_HISTORY'|translate }}</h5> -->
 		</div>
-		<ng-container *ngIf="list">
+		<ng-container *ngIf="list" > <!-- *ngIf="list" -->
 			<div class="card-table">
 				<div class="table-responsive-sm">
 					<table class="text-center">
@@ -36,21 +36,21 @@
 						</tr>
 						</thead>
 						<tbody>
-						<tr *ngFor="let order of list">
-							<td>{{ order.location }}</td>
-							<td>{{ order.position }}</td>
-							<td><button class="btn btn-primary">Apply</button></td>
-						</tr>
-						</tbody>
-					</table>
-				</div>
+							<tr *ngFor="let career of list">
+								<td>{{ career.location }}</td>
+								<td>{{ career.position }}</td>
+								<td><a class="btn btn-primary" routerLink="/about/careers/careers-apply/{{ career.id }}">Apply</a></td>
+							</tr>
+					</tbody>
+				</table>
 			</div>
-			<div class="card-divider"></div>
-			<div class="card-footer">
-			<!-- <app-pagination [formControl]="currentPage" [siblings]="2" [total]="list.pages"></app-pagination> -->
-			</div>
-		</ng-container>
-	</div>
+		</div>
+		<div class="card-divider"></div>
+		<div class="card-footer">
+		<!-- <app-pagination [formControl]="currentPage" [siblings]="2" [total]="list.pages"></app-pagination> -->
+		</div>
+	</ng-container>
+</div>
 
 <!-- </div> -->
 
