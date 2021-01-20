@@ -3,6 +3,7 @@ export const environment = {
 	production: true,
 	apiUrl: 'http://34.212.132.27/api/public/index.php',
 	apiFileUrl: 'http://34.212.132.27/api/public/index.php',
+	serverUrl: 'http://34.212.132.27/app/dist',
 	apiBackEndUrl: 'http://34.212.132.27/nsi-app/dist/',
 	//apiBackEndUrl: 'http://34.212.132.27/nsi-app/dist/',
 	// apiUrl: 'http://34.212.132.27/api/public/index.php',

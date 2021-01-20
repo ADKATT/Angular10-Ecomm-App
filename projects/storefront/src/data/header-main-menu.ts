@@ -3,11 +3,11 @@ import { MainMenuLink } from '../app/interfaces/main-menu-link';
 export const mainMenu: MainMenuLink[] = [
     {
         title: 'About',
-        url: '/',
+        url: '/site/about-us',
         submenu: {
             type: 'menu',
             links: [
-                {title: 'About Us', url: '/about/'},
+                {title: 'About Us', url: '/site/about-us'},
                 {title: 'Careers', url: '/about/careers'},
             ],
         },
