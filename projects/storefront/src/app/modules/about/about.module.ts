@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 import { AboutRoutingModule } from './about-routing.module';
@@ -13,6 +14,7 @@ import { BlockMapComponent } from './blocks/block-map/block-map.component';
 import { BlockReviewsComponent } from './blocks/block-reviews/block-reviews.component';
 import { BlockTeammatesComponent } from './blocks/block-teammates/block-teammates.component';
 import { CareersComponent } from './careers/careers.component';
+import { ApplyJobComponent } from './careers/apply-job/apply-job.component';
 
 @NgModule({
   declarations: [
@@ -20,13 +22,16 @@ import { CareersComponent } from './careers/careers.component';
 	BlockMapComponent, 
 	BlockReviewsComponent, 
 	BlockTeammatesComponent, 
-	CareersComponent
+	CareersComponent,
+	ApplyJobComponent
   ],
   imports: [
-    CommonModule,
+	CommonModule,
 	SharedModule,
 	CarouselModule,
-    AboutRoutingModule
+	AboutRoutingModule,
+	FormsModule,
+	ReactiveFormsModule
   ]
 })
 export class AboutModule { }

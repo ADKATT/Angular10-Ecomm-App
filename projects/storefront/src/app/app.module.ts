@@ -21,6 +21,7 @@ import { HeaderModule } from './modules/header/header.module';
 import { LanguageModule } from './modules/language/language.module';
 import { MobileModule } from './modules/mobile/mobile.module';
 import { SharedModule } from './modules/shared/shared.module';
+import { SpecialsModule } from './modules/specials/specials.module';
 
 // components
 import { AppComponent } from './app.component';
@@ -118,6 +119,7 @@ import { fakeBackendProvider } from './_helpers/fake-backend';
         }),
         MobileModule,
         SharedModule,
+        SpecialsModule,
     ],
 	providers: [
 		{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

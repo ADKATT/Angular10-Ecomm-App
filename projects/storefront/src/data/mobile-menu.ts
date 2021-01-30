@@ -3,9 +3,9 @@ import { MobileMenuLink } from '../app/interfaces/mobile-menu-link';
 export const mobileMenuLinks: MobileMenuLink[] = [
 	{
         title: 'About',
-        url: '/About/',
+        url: '/site/about-us',
         submenu: [
-			{title: 'About Us', url: '/about/'},
+			{title: 'About Us', url: '/site/about-us'},
 			{title: 'Careers', url: '/about/careers'},
         ],
     },
@@ -28,7 +28,7 @@ export const mobileMenuLinks: MobileMenuLink[] = [
     },
     {
         title: 'Specials',
-        url: '/account',
+        url: '/specials/specials-grid-4-sidebar',
     },
 	{
         title: 'Sales Portal',

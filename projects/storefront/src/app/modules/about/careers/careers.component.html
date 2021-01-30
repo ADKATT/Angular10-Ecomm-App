@@ -1,18 +1,3 @@
-<!-- <app-block-header -->
-    <!-- [pageTitle]="pageTitle$|async" -->
-    <!-- [breadcrumb]="breadcrumbs$|async" -->
-<!-- ></app-block-header> -->
-
-<!-- <div class="block-split"> -->
-    <!-- <div class="container"> -->
-        <!-- <div class="block-split__row row no-gutters"> -->
-            <!-- <div class="block-split__item block-split__item-content col-auto"> -->
-                <!-- <div class="block"> -->
-					
-                <!-- </div> -->
-            <!-- </div> -->
-        <!-- </div> -->
-    <!-- </div> -->
 <app-block-header
     pageTitle="Careers"
     [breadcrumb]="[
@@ -20,38 +5,68 @@
         {label: 'Careers', url: ''}
     ]"
 ></app-block-header>
-	<div class="card">
-		<div class="card-header">
-			<!-- <h5>{{ 'HEADER_ORDER_HISTORY'|translate }}</h5> -->
-		</div>
-		<ng-container *ngIf="list">
-			<div class="card-table">
-				<div class="table-responsive-sm">
-					<table class="text-center">
-						<thead>
-						<tr>
-							<th>Location</th>
-							<th>Position</th>
-							<th>Apply</th>
-						</tr>
-						</thead>
-						<tbody>
-						<tr *ngFor="let order of list">
-							<td>{{ order.location }}</td>
-							<td>{{ order.position }}</td>
-							<td><button class="btn btn-primary">Apply</button></td>
-						</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
-			<div class="card-divider"></div>
-			<div class="card-footer">
-			<!-- <app-pagination [formControl]="currentPage" [siblings]="2" [total]="list.pages"></app-pagination> -->
-			</div>
-		</ng-container>
-	</div>
-
-<!-- </div> -->
+<div class="card">
+    <div class="container container--max--xl">
+        <div class="block-teammates__list ng-star-inserted">
+            <div class="owl-carousel owl-theme owl-loaded owl-responsive owl-drag">
+                <div class="owl-stage-outer ng-star-inserted">
+                    <div class="ng-tns-c87-29">
+                        <div class="owl-stage ng-tns-c87-29 jobTableContainer">
+                            <ng-container *ngIf="careerData">
+                                <div class="card-table">
+                                    <div class="table-responsive-sm">
+                                        <table class="text-center">
+                                            <thead class="jobTableHeader">
+                                                <tr>
+                                                    <th>Location</th>
+                                                    <th>Position</th>
+                                                    <th>Apply</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let job of careerData">
+                                                    <td>{{ job.location }}</td>
+                                                    <td><a routerLink="/about/careers/apply-job/{{ job.id }}">{{ job.position }}</a></td>
+                                                    <td>
+                                                        <div *ngIf="appliedJobId && appliedJobId.indexOf(job.id) === -1">
+                                                            <button class="btn btn-primary" routerLink="/about/careers/apply-job/{{ job.id }}">Apply</button>
+                                                        </div>
+                                                        <div *ngIf="appliedJobId && appliedJobId.indexOf(job.id) !== -1">
+                                                            <app-status-badge type="success" tooltipcontent="In Stock" icon="success" class="status-badge status-badge--style--success status-badge--has-icon"><app-icon><svg width="13" height="13"><path d="M12,4.4L5.5,11L1,6.5l1.4-1.4l3.1,3.1L10.6,3L12,4.4z"></path></svg></app-icon></app-status-badge>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </ng-container>
+                            <ng-container *ngIf="!careerData">
+                                <div class="card-table">
+                                    <div class="table-responsive-sm">
+                                        <table class="text-center">
+                                            <thead class="jobTableHeader">
+                                                <tr>
+                                                    <th>Location</th>
+                                                    <th>Position</th>
+                                                    <th>Apply</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="3">No job posts are available for now.</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <app-block-space layout="before-footer"></app-block-space>

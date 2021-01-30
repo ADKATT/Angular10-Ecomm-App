@@ -74,7 +74,7 @@ export class AskPricePendingComponent implements OnInit, OnDestroy {
 	*/ 
 	onSubmit(): void {
 		this.submitted = true;
-     	if (this.searchForm.invalid) {
+		if (this.searchForm.invalid) {
 			return;
 		}
 

@@ -4,22 +4,31 @@ import { Address } from '../interfaces/address';
 import { Order } from '../interfaces/order';
 import { Product } from '../interfaces/product';
 import { Brand } from '../interfaces/brand';
+import { Router } from '@angular/router';
 
 @Injectable({
     providedIn: 'root',
 })
 export class UrlService {
-    constructor() { }
+
+    constructor(private router: Router) { }
 
     home(): string {
         return '/';
     }
 
     shop(): string {
+        //console.log('shop');
         return '/shop';
     }
 
+    specials(): string {
+        //console.log('specials');
+        return '/specials';
+    }
+
     category(category: Category): string {
+        console.log(category.type);
         if (category.type === 'shop') {
             return this.shopCategory(category);
         }

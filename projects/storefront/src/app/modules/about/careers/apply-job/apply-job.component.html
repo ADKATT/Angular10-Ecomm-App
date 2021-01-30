@@ -1,0 +1,121 @@
+<app-block-header
+    pageTitle="{{ jobDetails.position }}"
+    [breadcrumb]="[
+        {label: 'Home', url: ''},
+        {label: 'Careers', url: '/about/careers'},
+        {label: 'Apply', url: ''}
+    ]"
+></app-block-header>
+<div class="card">
+    <div class="container container--max--xl">
+        <div class="block-teammates__list ng-star-inserted">
+            <div class="row">
+                <div class="form-group col-md-2">
+                    <span class="applyTitleLabel">Job Location:</span>
+                </div>
+                <div class="form-group col-md-10">
+                    <span *ngIf="jobDetails.location" class="applyTitleLabelValue">{{ jobDetails.location }}</span>
+                    <span *ngIf="!jobDetails.location" class="applyTitleLabelValue">N/A</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-2">
+                    <span class="applyTitleLabel">Job Position:</span>
+                </div>
+                <div class="form-group col-md-10">
+                    <span *ngIf="jobDetails.position" class="applyTitleLabelValue">{{ jobDetails.position }}</span>
+                    <span *ngIf="!jobDetails.position" class="applyTitleLabelValue">N/A</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-2">
+                    <span class="applyTitleLabel">Job Description:</span>
+                </div>
+                <div class="form-group col-md-10">
+                    <span *ngIf="jobDetails.description" class="applyTitleLabelValue" [innerText]="jobDetails.description"></span>
+                    <span *ngIf="!jobDetails.description" class="applyTitleLabelValue">N/A</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-2">
+                    <span class="applyTitleLabel">Requirements:</span>
+                </div>
+                <div class="form-group col-md-10">
+                    <span *ngIf="jobDetails.requirements" class="applyTitleLabelValue" [innerText]="jobDetails.requirements"></span>
+                    <span *ngIf="!jobDetails.requirements" class="applyTitleLabelValue">N/A</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-2">
+                    <span class="applyTitleLabel">Job Type:</span>
+                </div>
+                <div class="form-group col-md-10">
+                    <span *ngIf="jobDetails.job_type" class="applyTitleLabelValue">{{ jobDetails.job_type }}</span>
+                    <span *ngIf="!jobDetails.job_type" class="applyTitleLabelValue">N/A</span>
+                </div>
+            </div>
+
+            <hr class="hrDivider" *ngIf="alreadyAppliedJobIds && alreadyAppliedJobIds.indexOf(jobDetails.id) === -1">
+
+            <div class="row" *ngIf="alreadyAppliedJobIds && alreadyAppliedJobIds.indexOf(jobDetails.id) === -1">
+                <div class="col-12 col-lg-12">
+                    <div class="ml-1">
+                        <div class="form-group col-md-12 text-center"><h2>Apply for this position</h2></div>
+                        <form [formGroup]="applyJobForm">
+                            <div class="form-row">
+                                <input type="hidden" formControlName="job_id" value="{{ jobDetails.id }}">
+                                <div class="form-group col-md-6">
+                                    <label for="first_name">First Name <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" formControlName="first_name" placeholder="First Name" [ngClass]="{ 'is-invalid': submitted && f.first_name.errors }">
+                                    <small class="form-text text-muted" *ngIf="submitted && f.first_name.errors" >
+                                        <div class="text-danger" *ngIf="f.first_name.errors.required">First Name is required</div>
+                                    </small>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="last_name">Last Name <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" formControlName="last_name" placeholder="Last Name" [ngClass]="{ 'is-invalid': submitted && f.last_name.errors }">
+                                    <small class="form-text text-muted" *ngIf="submitted && f.last_name.errors" >
+                                        <div class="text-danger" *ngIf="f.last_name.errors.required">Last Name is required</div>
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="email_address">Email Address<span class="text-danger">*</span></label>
+                                    <input type="email" class="form-control" formControlName="email_address" placeholder="Email Address" [ngClass]="{ 'is-invalid': submitted && f.email_address.errors }">
+                                    <small class="form-text text-muted" *ngIf="submitted && f.email_address.errors" >
+                                        <div class="text-danger" *ngIf="f.email_address.errors.required">Email address is required</div>
+                                        <div class="text-danger" *ngIf="f.email_address.errors.pattern">Email address is Invalid</div>
+                                    </small>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="contact_number">Contact Number <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" formControlName="contact_number" placeholder="Contact Number" [ngClass]="{ 'is-invalid': submitted && f.contact_number.errors }">
+                                    <small class="form-text text-muted" *ngIf="submitted && f.contact_number.errors" >
+                                        <div class="text-danger" *ngIf="f.contact_number.errors.required">Contact number is required</div>
+                                        <div class="text-danger" *ngIf="f.contact_number.errors.pattern">Contact number is not valid.</div>
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="resume" #labelFileImport>Upload <span class="text-danger">*</span></label>
+                                    <input type="file" class="form-control" formControlName="resume" placeholder="upload Resume" [ngClass]="{ 'is-invalid': submitted && f.resume.errors }" (change)="onFileChange($event.target.files)">
+                                    <small class="form-text text-muted" *ngIf="submitted && f.resume.errors" >
+                                        <div class="text-danger" *ngIf="f.resume.errors.required">Resume is required</div>
+                                        <div class="text-danger" *ngIf="!f.resume.errors.required && f.resume.errors.inValidExt">Please choose valid PDF, DOC file</div>
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-12 text-center">
+                                    <button type="button" class="btn btn-primary" (click)="onSubmit()">Apply Now</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,10 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { AccountApi } from '../../../api/base';
-import { merge, of, Subject } from 'rxjs';
-import { OrdersList } from '../../../interfaces/list';
-import { distinctUntilChanged, mergeMap, takeUntil } from 'rxjs/operators';
-import { FormControl } from '@angular/forms';
-import { UrlService } from '../../../services/url.service';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Subject } from 'rxjs';
+import { finalize, map, takeUntil, distinctUntilChanged, mergeMap } from 'rxjs/operators';
+import { CareersService } from '../../../services/careers.service';
 
 @Component({
 	selector: 'app-careers',
@@ -12,38 +9,51 @@ import { UrlService } from '../../../services/url.service';
 	styleUrls: ['./careers.component.scss'],
 })
 export class CareersComponent implements OnInit, OnDestroy {
-    private destroy$: Subject<void> = new Subject<void>();
+	private destroy$: Subject<void> = new Subject<void>();
+	careerData: any = [];
+	appliedJobId: any = [];
+	list: any;
 
-    currentPage: FormControl = new FormControl(1);
-    list: any;
+	constructor(
+		public careersService: CareersService,
+	) { }
 
-    constructor(
-        private accountApi: AccountApi,
-        public url: UrlService,
-    ) { }
+	ngOnInit(): void {
+		if (localStorage.getItem("careerJobIds") !== null) {
+			this.appliedJobId = localStorage.getItem("careerJobIds");
+		}
 
-    ngOnInit(): void {
-        this.list = [
-			{'location' : 'UK', 'position' : 'Manager'},
-			{'location' : 'US', 'position' : 'Sales Person'},
-			{'location' : 'US', 'position' : 'Manager'},
-			{'location' : 'UK', 'position' : 'Sales person'},
-		]
-		// merge(
-            // of(this.currentPage.value),
-            // this.currentPage.valueChanges,
-        // ).pipe(
-            // distinctUntilChanged(),
-            // mergeMap(page => this.accountApi.getOrdersList({
-                // limit: 5,
-                // page,
-            // })),
-            // takeUntil(this.destroy$),
-        // ).subscribe(x => this.list = x);
-    }
+		this.getActiveJobList();
+	}
 
-    ngOnDestroy(): void {
-        this.destroy$.next();
-        this.destroy$.complete();
-    }
+	/**
+	* Get Active Job List
+	*/
+	getActiveJobList(): void {
+		this.careersService.getActiveJobList().pipe(
+			takeUntil(this.destroy$),
+		).subscribe(
+			(res: any) => {
+				console.log(res);
+				if (res.success && (res.data).hasOwnProperty('data') && (res.data.data).length) {
+					this.careerData = res.data.data;
+				}
+				else {
+					console.log('Error');
+					this.careerData = '';
+				}
+			},
+			error => {
+				console.log(error);
+			},
+		);
+	}
+
+	/**
+	* ngOnDestroy
+	*/
+	ngOnDestroy(): void {
+		this.destroy$.next();
+		this.destroy$.complete();
+	}
 }
